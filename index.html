@@ -96,7 +96,7 @@
               <a href="detail_produk.html" class="btn-outline-small">
                 <i class="fa-solid fa-circle-info"></i> Detail
               </a>
-               <button class="buy-button-trigger btn-primary-small">
+              <button class="buy-button-trigger btn-primary-small">
                 <i class="fa-solid fa-cart-plus"></i>Keranjang
               </button>
             </div>
@@ -125,7 +125,7 @@
               <a href="detail_produk.html" class="btn-outline-small">
                 <i class="fa-solid fa-circle-info"></i> Detail
               </a>
-               <button class="buy-button-trigger btn-primary-small">
+              <button class="buy-button-trigger btn-primary-small">
                 <i class="fa-solid fa-cart-plus"></i>Keranjang
               </button>
             </div>
@@ -183,7 +183,7 @@
               <a href="detail_produk.html" class="btn-outline-small">
                 <i class="fa-solid fa-circle-info"></i> Detail
               </a>
-               <button class="buy-button-trigger btn-primary-small">
+              <button class="buy-button-trigger btn-primary-small">
                 <i class="fa-solid fa-cart-plus"></i>Keranjang
               </button>
             </div>
@@ -199,7 +199,7 @@
             menarik
           </p>
           <a href="produk.html" class="btn btn-outline">
-            <i class="fa-solid fa-right-to-bracket"></i>Lihat Semua Produk
+            <i class="fa-solid fa-right-to-bracket"></i>Jelajahi Semua Produk
           </a>
         </div>
       </section>
@@ -248,103 +248,135 @@
       </div>
     </footer>
     <div id="orderPopupOverlay" class="modal-overlay">
-        <div class="popup-container">
-            <h2 class="popup-header">Detail Pesanan Anda</h2>
+      <div class="popup-container">
+        <h2 class="popup-header">Detail Pesanan Anda</h2>
 
-            <!-- Form to collect order details -->
-            <form id="orderForm">
-                <div class="form-group">
-                    <label for="orderQuantity">Jumlah Pesanan:</label>
-                    <input type="number" id="orderQuantity" name="orderQuantity" min="1" value="1">
-                </div>
+        <!-- Form to collect order details -->
+        <form id="orderForm">
+          <div class="form-group">
+            <label for="orderQuantity">Jumlah Pesanan: </label>
+            <input
+              type="number"
+              id="orderQuantity"
+              name="orderQuantity"
+              min="1"
+              value="1"
+            />
+          </div>
 
-                <div class="form-group">
-                    <label for="deliveryDate">Tanggal Pengiriman:</label>
-                    <input type="date" id="deliveryDate" name="deliveryDate">
-                </div>
+          <div class="form-group">
+            <label for="deliveryDate">Tanggal Pengiriman: </label>
+            <input type="date" id="deliveryDate" name="deliveryDate" />
+          </div>
 
-                <div class="form-group">
-                    <label>Opsi Pengiriman:</label>
-                    <div class="radio-options">
-                        <label for="optionDelivery">
-                            <input type="radio" id="optionDelivery" name="deliveryOption" value="dikirim" checked>
-                            Barang Dikirim
-                        </label>
-                        <label for="optionPickup">
-                            <input type="radio" id="optionPickup" name="deliveryOption" value="ambil_sendiri">
-                            Ambil Sendiri
-                        </label>
-                    </div>
-                </div>
+          <div class="form-group">
+            <label>Opsi Pengiriman:</label>
+            <div class="radio-options">
+              <label for="optionDelivery">
+                <input
+                  type="radio"
+                  id="optionDelivery"
+                  name="deliveryOption"
+                  value="dikirim"
+                  checked
+                />
+                Barang Dikirim
+              </label>
+              <label for="optionPickup">
+                <input
+                  type="radio"
+                  id="optionPickup"
+                  name="deliveryOption"
+                  value="ambil_sendiri"
+                />
+                Ambil Sendiri
+              </label>
+            </div>
+          </div>
 
-                <div class="form-group">
-                    <label for="orderMessage">Pesan (opsional):</label>
-                    <textarea id="orderMessage" name="orderMessage" placeholder="Tuliskan pesan Anda di sini..."></textarea>
-                </div>
+          <div class="form-group">
+            <label for="orderMessage">Pesan (opsional):</label>
+            <textarea
+              id="orderMessage"
+              name="orderMessage"
+              placeholder="Tuliskan pesan Anda di sini..."
+            ></textarea>
+          </div>
 
-                <div class="product-buttons">
-                    <button type="button" id="cancelOrderBtn" class="btn-primary-small">Batal</button>
-                    <button type="submit" id="confirmOrderBtn" class="btn-primary-small">Konfirmasi Pesanan</button>
-                </div>
-            </form>
-        </div>
+          <div class="nav-links">
+            <button type="button" id="cancelOrderBtn" class="btn-outline-small">
+              Batal
+            </button>
+            <button
+              type="submit"
+              id="confirmOrderBtn"
+              class="btn-primary-small"
+            >
+              <i class="fa-so"></i> Konfirmasi Pesanan
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <script>
-        const buyButtons = document.querySelectorAll('.buy-button-trigger');
-        const orderPopupOverlay = document.getElementById('orderPopupOverlay');
-        const cancelOrderBtn = document.getElementById('cancelOrderBtn');
-        const confirmOrderBtn = document.getElementById('confirmOrderBtn');
-        const orderForm = document.getElementById('orderForm');
-        const deliveryDateInput = document.getElementById('deliveryDate');
+      const buyButtons = document.querySelectorAll(".buy-button-trigger");
+      const orderPopupOverlay = document.getElementById("orderPopupOverlay");
+      const cancelOrderBtn = document.getElementById("cancelOrderBtn");
+      const confirmOrderBtn = document.getElementById("confirmOrderBtn");
+      const orderForm = document.getElementById("orderForm");
+      const deliveryDateInput = document.getElementById("deliveryDate");
 
-        // Function to show the pop-up
-        function showPopup() {
-            orderPopupOverlay.classList.add('show');
-            // Set default delivery date to today
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months start at 0!
-            const dd = String(today.getDate()).padStart(2, '0');
-            deliveryDateInput.value = `${yyyy}-${mm}-${dd}`;
-        }
+      // Function to show the pop-up
+      function showPopup() {
+        orderPopupOverlay.classList.add("show");
+        // Set default delivery date to today
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months start at 0!
+        const dd = String(today.getDate()).padStart(2, "0");
+        deliveryDateInput.value = `${yyyy}-${mm}-${dd}`;
+      }
 
-        // Function to hide the pop-up
-        function hidePopup() {
-            orderPopupOverlay.classList.remove('show');
-        }
+      // Function to hide the pop-up
+      function hidePopup() {
+        orderPopupOverlay.classList.remove("show");
+      }
 
-        buyButtons.forEach(button => {
-            button.addEventListener('click', showPopup);
+      buyButtons.forEach((button) => {
+        button.addEventListener("click", showPopup);
+      });
+
+      // Event listener for the "Batal" button
+      cancelOrderBtn.addEventListener("click", hidePopup);
+
+      // Event listener for form submission (Konfirmasi Pesanan)
+      orderForm.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent default form submission to keep pop-up open for now
+
+        // You can add logic here to retrieve data from the form
+        const quantity = document.getElementById("orderQuantity").value;
+        const deliveryDate = document.getElementById("deliveryDate").value;
+        const deliveryOption = document.querySelector(
+          'input[name="deliveryOption"]:checked'
+        ).value;
+        const message = document.getElementById("orderMessage").value;
+
+        // For demonstration, log the data to the console
+        console.log("Detail Pesanan:", {
+          jumlah: quantity,
+          tanggalPengiriman: deliveryDate,
+          opsiPengiriman: deliveryOption,
+          pesan: message,
         });
 
-        // Event listener for the "Batal" button
-        cancelOrderBtn.addEventListener('click', hidePopup);
-
-        // Event listener for form submission (Konfirmasi Pesanan)
-        orderForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevent default form submission to keep pop-up open for now
-
-            // You can add logic here to retrieve data from the form
-            const quantity = document.getElementById('orderQuantity').value;
-            const deliveryDate = document.getElementById('deliveryDate').value;
-            const deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value;
-            const message = document.getElementById('orderMessage').value;
-
-            // For demonstration, log the data to the console
-            console.log('Detail Pesanan:', {
-                jumlah: quantity,
-                tanggalPengiriman: deliveryDate,
-                opsiPengiriman: deliveryOption,
-                pesan: message
-            });
-
-            // After data is processed, hide the pop-up
-            hidePopup();
-            // Provide feedback to the user (instead of alert)
-            // You could use a custom modal for this too, or update a part of the page
-            const messageBox = document.createElement('div');
-            messageBox.textContent = 'Pesanan Anda telah dikonfirmasi! Lihat detail di konsol browser.';
-            messageBox.style.cssText = `
+        // After data is processed, hide the pop-up
+        hidePopup();
+        // Provide feedback to the user (instead of alert)
+        // You could use a custom modal for this too, or update a part of the page
+        const messageBox = document.createElement("div");
+        messageBox.textContent =
+          "Pesanan Anda telah dikonfirmasi! Lihat detail di konsol browser.";
+        messageBox.style.cssText = `
                 position: fixed;
                 bottom: 20px;
                 left: 50%;
@@ -358,29 +390,33 @@
                 opacity: 0;
                 transition: opacity 0.5s ease;
             `;
-            document.body.appendChild(messageBox);
+        document.body.appendChild(messageBox);
 
-            setTimeout(() => {
-                messageBox.style.opacity = '1';
-            }, 50); // Small delay for transition
+        setTimeout(() => {
+          messageBox.style.opacity = "1";
+        }, 50); // Small delay for transition
 
-            setTimeout(() => {
-                messageBox.style.opacity = '0';
-                messageBox.addEventListener('transitionend', () => messageBox.remove());
-            }, 3000); // Hide after 3 seconds
-        });
+        setTimeout(() => {
+          messageBox.style.opacity = "0";
+          messageBox.addEventListener("transitionend", () =>
+            messageBox.remove()
+          );
+        }, 3000); // Hide after 3 seconds
+      });
 
-        // Hide pop-up if clicking on the overlay outside the pop-up
-        orderPopupOverlay.addEventListener('click', (event) => {
-            if (event.target === orderPopupOverlay) {
-                hidePopup();
-            }
-        });
+      // Hide pop-up if clicking on the overlay outside the pop-up
+      orderPopupOverlay.addEventListener("click", (event) => {
+        if (event.target === orderPopupOverlay) {
+          hidePopup();
+        }
+      });
 
-        // Prevent pop-up from closing when clicking inside the popup-container itself
-        document.querySelector('.popup-container').addEventListener('click', (event) => {
-            event.stopPropagation(); // Stop click event from bubbling up to the overlay
+      // Prevent pop-up from closing when clicking inside the popup-container itself
+      document
+        .querySelector(".popup-container")
+        .addEventListener("click", (event) => {
+          event.stopPropagation(); // Stop click event from bubbling up to the overlay
         });
     </script>
   </body>
-    </html> 
+</html>
