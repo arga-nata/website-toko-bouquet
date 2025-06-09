@@ -1031,7 +1031,7 @@ footer {
 
 .category:hover,
 .category.active {
-  background-color: var(--primary);
+  background-color: var(--accent);
   color: white;
   border-color: var(--primary);
 }
