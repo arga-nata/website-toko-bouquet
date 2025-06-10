@@ -53,7 +53,7 @@ orderForm.addEventListener("submit", (event) => {
   // You could use a custom modal for this too, or update a part of the page
   const messageBox = document.createElement("div");
   messageBox.textContent =
-    "Pesanan Anda telah dikonfirmasi! Lihat detail di konsol browser.";
+    "Pesanan Anda telah ditambahkan, silakan cek Keranjang!.";
   messageBox.style.cssText = `
                 position: fixed;
                 bottom: 20px;
