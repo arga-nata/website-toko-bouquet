@@ -1,565 +1,671 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="images/cat.png" />
-    <title>WB Bouquet Shop</title>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" type="image/x-icon" href="images/Logo.png"/>
+    <title>Produk - WB Bouquet Shop</title>
     <script
-      src="https://kit.fontawesome.com/9462eee823.js"
-      crossorigin="anonymous"
+            src="https://kit.fontawesome.com/9462eee823.js"
+            crossorigin="anonymous"
     ></script>
-    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
     />
-  </head>
-  <body>
-    <header class="header">
-      <nav class="navbar">
+    <style>
+        /* =================================== */
+        /* == SEMUA STYLE DARI HALAMAN UTAMA == */
+        /* =================================== */
+
+        /* Aturan Grid untuk 5 Kolom */
+        .product-grid {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+        }
+
+        .product-description {
+            font-size: 0.85rem;
+        }
+
+        /* Style untuk Kontrol Kuantitas */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .quantity-control button {
+            background-color: #f0f0f0;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .quantity-control button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .quantity-control input[type="number"] {
+            width: 100%;
+            text-align: center;
+            border: none;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            font-weight: 600;
+            padding: 8px;
+            -moz-appearance: textfield;
+        }
+
+        .quantity-control input[type="number"]::-webkit-inner-spin-button,
+        .quantity-control input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .popup-container .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        /* CSS UNTUK OPSI PENGIRIMAN */
+        .radio-options-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .radio-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .radio-label i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .radio-label:hover {
+            border-color: #aaa;
+            background-color: #f5f5f5;
+        }
+
+        .radio-input:checked + .radio-label {
+            border-color: var(--primary, #007bff);
+            color: var(--primary, #007bff);
+            background-color: var(--light, #e7f3ff);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Style Footer Tema Gelap yang Diperbarui */
+        footer {
+            background-color: #111827;
+            color: #9ca3af;
+            padding: 4rem 2rem 2rem 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background-color: #ffffff;
+        }
+
+        .footer-column p {
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-column ul li i {
+            margin-right: 12px;
+            margin-top: 5px;
+            width: 16px;
+            text-align: center;
+            color: #d1d5db;
+        }
+
+        .footer-column ul a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-column ul a:hover {
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        .footer-column .social-icons {
+            margin-top: 1.5rem;
+        }
+
+        .footer-column .social-icons a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #374151;
+            color: #ffffff;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            margin-right: 0.75rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .footer-column .social-icons a:hover {
+            background-color: var(--primary, #3b82f6);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            font-size: 0.9rem;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 1rem;
+        }
+
+        .category-btn {
+            background-color: transparent; /* Hapus background */
+            color: #4b5563; /* Warna teks lebih soft */
+            border: none; /* Hapus border */
+            border-bottom: 3px solid transparent; /* Garis bawah transparan (untuk menjaga layout) */
+            padding: 10px 18px;
+            border-radius: 0; /* Hapus border-radius agar menjadi flat */
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .category-btn:hover {
+            color: #000000; /* Teks menjadi hitam saat di-hover */
+            background-color: #f9fafb; /* Latar yang sangat samar saat di-hover */
+        }
+
+        .category-btn.active {
+            color: var(--primary, #007bff); /* Warna teks primer untuk yang aktif */
+            font-weight: 700; /* Teks lebih tebal */
+            border-bottom-color: var(--primary, #007bff); /* Garis bawah tegas dengan warna primer */
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar">
         <a href="index.html" class="logo_brand">
-          <img src="images/Logo.png" alt="Logo" />
-          <span>Wiwid Beauty | Bouquet Shop</span>
+            <img src="images/Logo.png" alt="Logo"/>
+            <span>Wiwid Beauty | Bouquet Shop</span>
         </a>
         <ul class="nav-links">
-          <li>
-            <a href="index.html"> <i class="fa-solid fa-house"></i>Beranda </a>
-          </li>
-          <li>
-            <a href="produk.html" class="active">
-              <i class="fa-solid fa-store"></i>Produk
-            </a>
-          </li>
-          <li>
-            <a href="keranjang.html">
-              <i class="fa-solid fa-cart-shopping"></i>
-              Keranjang
-            </a>
-          </li>
-          <li>
-            <a href="kontak.html">
-              <i class="fa-solid fa-address-book"></i>Kontak
-            </a>
-          </li>
+            <li>
+                <a href="index.html">
+                    <i class="fa-solid fa-house"></i>Beranda
+                </a>
+            </li>
+            <li>
+                <a href="produk.html" class="active"> <i class="fa-solid fa-store"></i>Produk </a>
+            </li>
+            <li>
+                <a href="keranjang.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Keranjang
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-address-book"></i>Kontak
+                </a>
+            </li>
+            <li>
+                <a href="#" id="admin-link">
+                    <i class="fa-solid fa-lock"></i>Admin
+                </a>
+            </li>
         </ul>
-      </nav>
-    </header>
-    <main>
-      <div class="categories">
-        <button
-          type="submit"
-          name="kategori"
-          value="semua"
-          class="category active"
-        >
-          Semua
-        </button>
-        <button type="submit" name="kategori" value="1" class="category">
-          Kategori A
-        </button>
-        <button type="submit" name="kategori" value="2" class="category">
-          Kategori B
-        </button>
-        <button type="submit" name="kategori" value="3" class="category">
-          Kategori C
-        </button>
-      </div>
-      <div class="product-grid">
+    </nav>
+</header>
+<main>
+    <div class="category-filter">
+        <button class="category-btn active">Semua</button>
+        <button class="category-btn">Kategori A</button>
+        <button class="category-btn">Kategori B</button>
+        <button class="category-btn">Kategori C</button>
+        <button class="category-btn">Kategori Custom</button>
+    </div>
+
+    <div class="product-grid">
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rose-Symphony-Bouquet.jpg"
-              alt="Rose Symphony Bouquet"
-              alt="Produk terlaris 1"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rose Symphony Bouquet</h3>
-            <p class="product-description">
-              Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan,
-              dan Ketulusan
-            </p>
-            <span class="product-price">Rp 485.000 </span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 4 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Rose-Symphony-Bouquet.jpg" alt="Rose Symphony Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Rose Symphony Bouquet</h3>
+                <p class="product-description">Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan, dan
+                    Ketulusan</p>
+                <span class="product-price">Rp 485.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Pink-Perfect-Bouquet.jpg"
-              alt="Black Pink Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Black Pink Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 510.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 6 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Pink-Perfect-Bouquet.jpg" alt="Black Pink Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Black Pink Bouquet</h3>
+                <p class="product-description">Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine, Ulang
+                    Tahun, dan lainnya</p>
+                <span class="product-price">Rp 510.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rosy-ColourPop-Bouquet.jpg"
-              alt="Rosy ColourPop Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rosy ColourPop Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 885.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 11 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Rosy-ColourPop-Bouquet.jpg"
+                     alt="Rosy ColourPop Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Rosy ColourPop Bouquet</h3>
+                <p class="product-description">Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine, Ulang
+                    Tahun, dan lainnya</p>
+                <span class="product-price">Rp 885.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Valentina-Bouquet.jpg"
-              alt="Valentina Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Valentina Bouquet</h3>
-            <p class="product-description">
-              Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk
-              Hadiah Orang Terkasih
-            </p>
-            <span class="product-price">Rp 735.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 15 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Valentina-Bouquet.jpg" alt="Valentina Bouquet"/>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rose-Symphony-Bouquet.jpg"
-              alt="Rose Symphony Bouquet"
-              alt="Produk terlaris 1"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rose Symphony Bouquet</h3>
-            <p class="product-description">
-              Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan,
-              dan Ketulusan
-            </p>
-            <span class="product-price">Rp 485.000 </span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 4 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-content">
+                <h3 class="product-title">Valentina Bouquet</h3>
+                <p class="product-description">Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk Hadiah
+                    Orang Terkasih.</p>
+                <span class="product-price">Rp 735.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Pink-Perfect-Bouquet.jpg"
-              alt="Black Pink Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Black Pink Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 510.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 6 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Two-Shades-of-Love-Bouquet.jpg" alt="Two Shades of Love Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Two Shades of Love Bouquet</h3>
+                <p class="product-description">Hadiah Romantis untuk Momen Spesial seperti Hari Valentine</p>
+                <span class="product-price">Rp 480.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rosy-ColourPop-Bouquet.jpg"
-              alt="Rosy ColourPop Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rosy ColourPop Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 885.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 11 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Butaro.jpg" alt="Cuddlemate Butarro Bear"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Cuddlemate Butarro Bear</h3>
+                <p class="product-description"> Cocok Dijadikan Sebagai Kado Anniversary, Bachelorette, Ulang Tahun, dan
+                    Valentine</p>
+                <span class="product-price">Rp 125.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Valentina-Bouquet.jpg"
-              alt="Valentina Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Valentina Bouquet</h3>
-            <p class="product-description">
-              Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk
-              Hadiah Orang Terkasih
-            </p>
-            <span class="product-price">Rp 735.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 15 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Prudence-Artificial.jpg" alt="Prudence Artificial"/>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="product-grid">
-        <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rose-Symphony-Bouquet.jpg"
-              alt="Rose Symphony Bouquet"
-              alt="Produk terlaris 1"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rose Symphony Bouquet</h3>
-            <p class="product-description">
-              Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan,
-              dan Ketulusan
-            </p>
-            <span class="product-price">Rp 485.000 </span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 4 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-content">
+                <h3 class="product-title">Prudence Artificial</h3>
+                <p class="product-description"> Dilengkapi Aksesori Burung dan Dirangkai dalam Vas Bulat Besar, cocok
+                    untuk Ulang Tahun, Wisuda, Anniversary, hingga Valentine</p>
+                <span class="product-price">Rp 785.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Pink-Perfect-Bouquet.jpg"
-              alt="Black Pink Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Black Pink Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 510.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 6 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/Joyful-night.jpg" alt="Joyful Night Artificial"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Joyful Night Artificial</h3>
+                <p class="product-description">Terdiri dari White Pampas, Green Pine Dusty, Pine Cone, Mini Nutcrackers,
+                    dan Decorative Ball in Gold, dihias dengan Pita Nuansa Natal</p>
+                <span class="product-price">Rp 935.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Rosy-ColourPop-Bouquet.jpg"
-              alt="Rosy ColourPop Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Rosy ColourPop Bouquet</h3>
-            <p class="product-description">
-              Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine,
-              Ulang Tahun, Anniversary, dan Hari Suka Cita lainnya
-            </p>
-            <span class="product-price">Rp 885.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 11 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="https://placehold.co/400x400/86efac/333333?text=Orchid+Elegance"
+                     alt="Orchid Elegance Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Orchid Elegance</h3>
+                <p class="product-description">Rangkaian anggun dari bunga anggrek pilihan, melambangkan keindahan dan
+                    kemewahan.</p>
+                <span class="product-price">Rp 950.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia: 5 item</span>
+                <div class="product-buttons">
+                    <a href="detail_produk.html" class="btn-outline-small"><i class="fa-solid fa-circle-info"></i>
+                        Detail</a>
+                    <button class="buy-button-trigger btn-primary-small"><i class="fa-solid fa-cart-plus"></i>Beli
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">
-            <img
-              src="images/Valentina-Bouquet.jpg"
-              alt="Valentina Bouquet"
-              alt="Produk terlaris 2"
-            />
-          </div>
-          <div class="product-content">
-            <h3 class="product-title">Valentina Bouquet</h3>
-            <p class="product-description">
-              Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk
-              Hadiah Orang Terkasih
-            </p>
-            <span class="product-price">Rp 735.000</span>
-            <span class="product-stock"
-              ><i class="fa-solid fa-check"></i>Tersedia: 15 item</span
-            >
-            <div class="product-buttons">
-              <a href="detail_produk.html" class="btn-outline-small">
-                <i class="fa-solid fa-circle-info"></i> Detail
-              </a>
-              <button class="buy-button-trigger btn-primary-small">
-                <i class="fa-solid fa-cart-plus"></i>Keranjang
-              </button>
+            <div class="product-image">
+                <img src="images/flower_item_6.jpeg"
+                     alt="Graduation Bear Bouquet"/>
             </div>
-          </div>
+            <div class="product-content">
+                <h3 class="product-title">Graduation Bear</h3>
+                <p class="product-description">Hadiah kelulusan sempurna dengan boneka wisuda lucu dan bunga-bunga
+                    segar.</p>
+                <span class="product-price">Rp 375.000</span>
+                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
+                <div class="product-buttons">
+                    <button class="buy-button-trigger btn-primary-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                        Keranjang
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+</main>
 
-      <div id="orderPopupOverlay" class="modal-overlay">
-        <div class="popup-container">
-          <h2 class="popup-header">Detail Pesanan Anda</h2>
+<footer>
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>Wiwid Bouquet</h3>
+            <p>Merangkai cerita Anda dalam keindahan yang tak terlupakan. Temukan buket yang bukan hanya indah
+                dipandang, tapi juga hangat di hati.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Hubungi Kami</h3>
+            <ul>
+                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Raya Talok, Garum, Blitar</span></li>
+                <li><a href="tel:+628123456789"><i class="fa-solid fa-phone"></i><span>+62 812-3456-7890</span></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i><span>@wiwidbouquet</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
+    </div>
+</footer>
 
-          <!-- Form to collect order details -->
-          <form id="orderForm">
+<div id="orderPopupOverlay" class="modal-overlay">
+    <div class="popup-container">
+        <h2 class="popup-header">Detail Pesanan Anda</h2>
+        <form id="orderForm">
             <div class="form-group">
-              <label for="orderQuantity">Jumlah Pesanan:</label>
-              <input
-                type="number"
-                id="orderQuantity"
-                name="orderQuantity"
-                min="1"
-                value="1"
-              />
+                <label>Jumlah Pesanan:</label>
+                <div class="quantity-control">
+                    <button type="button" id="decreaseBtn">-</button>
+                    <input id="quantityInput" type="number" value="1" min="1">
+                    <button type="button" id="increaseBtn">+</button>
+                </div>
             </div>
-
             <div class="form-group">
-              <label for="deliveryDate">Tanggal Pengiriman:</label>
-              <input type="date" id="deliveryDate" name="deliveryDate" />
+                <label for="deliveryDate">Tanggal Pengiriman:</label>
+                <input type="date" id="deliveryDate" name="deliveryDate"/>
             </div>
-
             <div class="form-group">
-              <label>Opsi Pengiriman:</label>
-              <div class="radio-options">
-                <label for="optionDelivery">
-                  <input
-                    type="radio"
-                    id="optionDelivery"
-                    name="deliveryOption"
-                    value="dikirim"
-                    checked
-                  />
-                  Barang Dikirim
-                </label>
-                <label for="optionPickup">
-                  <input
-                    type="radio"
-                    id="optionPickup"
-                    name="deliveryOption"
-                    value="ambil_sendiri"
-                  />
-                  Ambil Sendiri
-                </label>
-              </div>
+                <label>Opsi Pengambilan:</label>
+                <div class="radio-options-container">
+                    <div>
+                        <input type="radio" id="optionDelivery" name="deliveryOption" value="dikirim"
+                               class="radio-input" checked>
+                        <label for="optionDelivery" class="radio-label">
+                            <i class="fa-solid fa-truck-fast"></i>
+                            <span>Antarin</span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="optionPickup" name="deliveryOption" value="ambil_sendiri"
+                               class="radio-input">
+                        <label for="optionPickup" class="radio-label">
+                            <i class="fa-solid fa-person-walking-luggage"></i>
+                            <span>Ambil Sendiri</span>
+                        </label>
+                    </div>
+                </div>
             </div>
-
             <div class="form-group">
-              <label for="orderMessage">Pesan (opsional):</label>
-              <textarea
-                id="orderMessage"
-                name="orderMessage"
-                placeholder="Tuliskan pesan Anda di sini..."
-              ></textarea>
+                <label for="orderMessage">Pesan (opsional):</label>
+                <textarea id="orderMessage" name="orderMessage"
+                          placeholder="Contoh: Tolong bungkus dengan rapi."></textarea>
             </div>
-
             <div class="nav-links">
-              <button
-                type="button"
-                id="cancelOrderBtn"
-                class="btn-outline-small"
-              >
-                Batal
-              </button>
-              <button
-                type="submit"
-                id="confirmOrderBtn"
-                class="btn-primary-small"
-              >
-                <i class="fa-so"></i> Konfirmasi Pesanan
-              </button>
+                <button type="button" id="cancelOrderBtn" class="btn-outline-small">
+                    Batal
+                </button>
+                <button type="submit" id="confirmOrderBtn" class="btn-primary-small">
+                    Konfirmasi Pesanan
+                </button>
             </div>
-          </form>
-        </div>
-      </div>
-    </main>
-    <script>
-      const buyButtons = document.querySelectorAll(".buy-button-trigger");
-      const orderPopupOverlay = document.getElementById("orderPopupOverlay");
-      const cancelOrderBtn = document.getElementById("cancelOrderBtn");
-      const confirmOrderBtn = document.getElementById("confirmOrderBtn");
-      const orderForm = document.getElementById("orderForm");
-      const deliveryDateInput = document.getElementById("deliveryDate");
+        </form>
+    </div>
+</div>
 
-      // Function to show the pop-up
-      function showPopup() {
+<script>
+    const buyButtons = document.querySelectorAll(".buy-button-trigger");
+    const orderPopupOverlay = document.getElementById("orderPopupOverlay");
+    const cancelOrderBtn = document.getElementById("cancelOrderBtn");
+    const orderForm = document.getElementById("orderForm");
+    const deliveryDateInput = document.getElementById("deliveryDate");
+    const decreaseBtn = document.getElementById('decreaseBtn');
+    const increaseBtn = document.getElementById('increaseBtn');
+    const quantityInput = document.getElementById('quantityInput');
+
+    function showPopup() {
         orderPopupOverlay.classList.add("show");
-        // Set default delivery date to today
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, "0"); // Months start at 0!
-        const dd = String(today.getDate()).padStart(2, "0");
-        deliveryDateInput.value = `${yyyy}-${mm}-${dd}`;
-      }
+        const today = new Date().toISOString().split('T')[0];
+        deliveryDateInput.setAttribute('min', today);
+        deliveryDateInput.value = today;
+        updateQuantity(1);
+    }
 
-      // Function to hide the pop-up
-      function hidePopup() {
+    function hidePopup() {
         orderPopupOverlay.classList.remove("show");
-      }
+    }
 
-      buyButtons.forEach((button) => {
+    buyButtons.forEach((button) => {
         button.addEventListener("click", showPopup);
-      });
+    });
 
-      // Event listener for the "Batal" button
-      cancelOrderBtn.addEventListener("click", hidePopup);
+    cancelOrderBtn.addEventListener("click", hidePopup);
 
-      // Event listener for form submission (Konfirmasi Pesanan)
-      orderForm.addEventListener("submit", (event) => {
-        event.preventDefault(); // Prevent default form submission to keep pop-up open for now
+    orderPopupOverlay.addEventListener("click", (event) => {
+        if (event.target === orderPopupOverlay) {
+            hidePopup();
+        }
+    });
 
-        // You can add logic here to retrieve data from the form
-        const quantity = document.getElementById("orderQuantity").value;
-        const deliveryDate = document.getElementById("deliveryDate").value;
-        const deliveryOption = document.querySelector(
-          'input[name="deliveryOption"]:checked'
-        ).value;
+    let quantity = 1;
+    let intervalId = null;
+    let timeoutId = null;
+
+    const updateQuantity = (newQuantity) => {
+        const num = parseInt(newQuantity, 10);
+        quantity = isNaN(num) || num < 1 ? 1 : num;
+        quantityInput.value = quantity;
+    };
+
+    const increase = () => updateQuantity(quantity + 1);
+    const decrease = () => updateQuantity(quantity - 1);
+
+    const startChanging = (changeFunction) => {
+        changeFunction();
+        timeoutId = setTimeout(() => {
+            intervalId = setInterval(changeFunction, 100);
+        }, 400);
+    };
+
+    const stopChanging = () => {
+        clearTimeout(timeoutId);
+        clearInterval(intervalId);
+    };
+
+    quantityInput.addEventListener('input', () => {
+        updateQuantity(quantityInput.value);
+    });
+
+    ['mousedown', 'touchstart'].forEach(type => {
+        increaseBtn.addEventListener(type, (e) => {
+            e.preventDefault();
+            startChanging(increase);
+        });
+        decreaseBtn.addEventListener(type, (e) => {
+            e.preventDefault();
+            startChanging(decrease);
+        });
+    });
+    ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(type => {
+        document.body.addEventListener(type, stopChanging);
+    });
+
+    orderForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const quantity = quantityInput.value;
+        const deliveryDate = deliveryDateInput.value;
+        const deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value;
         const message = document.getElementById("orderMessage").value;
 
-        // For demonstration, log the data to the console
         console.log("Detail Pesanan:", {
-          jumlah: quantity,
-          tanggalPengiriman: deliveryDate,
-          opsiPengiriman: deliveryOption,
-          pesan: message,
+            jumlah: quantity,
+            tanggalPengiriman: deliveryDate,
+            opsiPengiriman: deliveryOption,
+            pesan: message,
         });
 
-        // After data is processed, hide the pop-up
         hidePopup();
-        // Provide feedback to the user (instead of alert)
-        // You could use a custom modal for this too, or update a part of the page
+
         const messageBox = document.createElement("div");
-        messageBox.textContent =
-          "Pesanan Anda telah ditambahkan, silakan cek Keranjang!.";
+        messageBox.textContent = "Pesanan Anda telah ditambahkan, silakan cek Keranjang!";
         messageBox.style.cssText = `
                 position: fixed;
                 bottom: 20px;
                 left: 50%;
                 transform: translateX(-50%);
-                background-color: var(--primary); /* Green */
+                background-color: #4CAF50;
                 color: white;
                 padding: 15px 25px;
                 border-radius: 8px;
@@ -571,68 +677,14 @@
         document.body.appendChild(messageBox);
 
         setTimeout(() => {
-          messageBox.style.opacity = "1";
-        }, 50); // Small delay for transition
+            messageBox.style.opacity = "1";
+        }, 50);
 
         setTimeout(() => {
-          messageBox.style.opacity = "0";
-          messageBox.addEventListener("transitionend", () =>
-            messageBox.remove()
-          );
-        }, 3000); // Hide after 3 seconds
-      });
-
-      // Hide pop-up if clicking on the overlay outside the pop-up
-      orderPopupOverlay.addEventListener("click", (event) => {
-        if (event.target === orderPopupOverlay) {
-          hidePopup();
-        }
-      });
-
-      // Prevent pop-up from closing when clicking inside the popup-container itself
-      document
-        .querySelector(".popup-container")
-        .addEventListener("click", (event) => {
-          event.stopPropagation(); // Stop click event from bubbling up to the overlay
-        });
-    </script>
-  </body>
-  <footer>
-    <div class="footer-content">
-      <div class="footer-column">
-        <h3>Wiwid Bouquet</h3>
-        <p
-          style="
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
-            line-height: 1.6;
-          "
-        >
-          Temukan koleksi terbaik kami dan berikan hadiah yang berbicara lebih
-          dari sekadar kata-kata. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Iusto sit soluta hic! Voluptatum fuga amet
-          molestias, vitae tenetur quos? Minima, aliquid consectetur est
-          corporis porro necessitatibus reprehenderit ut voluptate hic!
-        </p>
-      </div>
-      <div class="footer-column">
-        <h3>Kontak</h3>
-        <ul class="footer-links">
-          <li>
-            <a href="#"
-              ><i class="fa-solid fa-location-dot"></i>RT. 01, RT.01/RW.TW. 03,
-              Talok, Pojok, Kec. Garum, Kabupaten Blitar, Jawa Timur 66182</a
-            >
-          </li>
-          <li>
-            <a href="#"><i class="fa-solid fa-phone"></i>+628123456789</a>
-          </li>
-          <li>
-            <a href="#"><i class="fa-solid fa-envelope"></i>waduh@gmail.com</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="copyright">&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi</div>
-  </footer>
+            messageBox.style.opacity = "0";
+            messageBox.addEventListener("transitionend", () => messageBox.remove());
+        }, 3000);
+    });
+</script>
+</body>
 </html>
