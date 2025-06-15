@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/x-icon" href="images/cat.png"/>
+    <title>Dashboard Admin | WB Bouquet Shop</title>
+    <script src="https://kit.fontawesome.com/9462eee823.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #240046;
+            --secondary: #3c096c;
+            --accent: #5a189a;
+            --light-gray: #eaeaea;
+            --dark: #212529;
+            --text: #333333;
+            --white: #ffffff;
+            --green: #28a745;
+            --orange: #fd7e14;
+            --red: #dc3545;
+            --blue: #0d6efd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f4f7f9;
+            color: var(--text);
+        }
+
+        .admin-header {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 {
+            font-size: 1.5rem;
+        }
+
+        .admin-header a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .dashboard-title {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table th, .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .data-table td {
+            vertical-align: middle;
+        }
+
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--white);
+            text-transform: uppercase;
+        }
+
+        .status.selesai {
+            background-color: var(--green);
+        }
+
+        .status.menunggu {
+            background-color: var(--orange);
+        }
+
+        .status.tersedia {
+            background-color: var(--green);
+            cursor: pointer;
+        }
+
+        .status.habis {
+            background-color: var(--red);
+            cursor: pointer;
+        }
+
+        .action-button, .action-btn {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .action-button {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .action-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .whatsapp-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .whatsapp-link:hover {
+            text-decoration: underline;
+        }
+
+        .control-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--white);
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(36, 0, 70, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn.edit {
+            background-color: var(--blue);
+            color: var(--white);
+        }
+
+        .action-btn.save {
+            background-color: var(--green);
+            color: var(--white);
+        }
+
+        .action-btn.delete {
+            background-color: var(--red);
+            color: var(--white);
+        }
+
+        .editable-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<header class="admin-header">
+    <h1>Dashboard Admin</h1>
+    <a href="index.html">Logout</a>
+</header>
+
+<main>
+    <h2 class="dashboard-title">Riwayat Pembelian</h2>
+    <table class="data-table" id="history-table">
+        <thead>
+        <tr>
+            <th>ID Pesanan</th>
+            <th>Nama Pelanggan</th>
+            <th>No. WhatsApp</th>
+            <th>Produk Dipesan</th>
+            <th>Tgl. Pengiriman</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#WB001</td>
+            <td>Budi Santoso</td>
+            <td><a href="https://wa.me/6281211112222" target="_blank" class="whatsapp-link">0812 1111 2222</a></td>
+            <td>Rose Symphony Bouquet (x1)</td>
+            <td>15 Juni 2025</td>
+            <td><span class="status selesai">Selesai</span></td>
+            <td>
+                <button class="action-button" disabled>Selesai</button>
+            </td>
+        </tr>
+        <tr>
+            <td>#WB002</td>
+            <td>Citra Lestari</td>
+            <td><a href="https://wa.me/6281333334444" target="_blank" class="whatsapp-link">0813 3333 4444</a></td>
+            <td>Black Pink Bouquet (x2)</td>
+            <td>14 Juni 2025</td>
+            <td><span class="status menunggu">Menunggu Pengerjaan</span></td>
+            <td>
+                <button class="action-button">Tandai Selesai</button>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="3">#WB003</td>
+            <td rowspan="3">Rina Permata</td>
+            <td rowspan="3"><a href="https://wa.me/6285655556666" target="_blank" class="whatsapp-link">0856 5555
+                6666</a></td>
+            <td>Valentina Bouquet (x1)</td>
+            <td rowspan="3">16 Juni 2025</td>
+            <td rowspan="3"><span class="status menunggu">Menunggu Pengerjaan</span></td>
+            <td rowspan="3">
+                <button class="action-button">Tandai Selesai</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Sunny Delight Bouquet (x1)</td>
+        </tr>
+        <tr>
+            <td>Rosy ColourPop Bouquet (x2)</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="control-section-header">
+        <h2 class="dashboard-title" style="margin: 0; border: none;">Kontrol Produk & Stok</h2>
+        <button class="btn-primary" id="add-product-btn"><i class="fa-solid fa-plus"></i> Tambah Produk Baru</button>
+    </div>
+
+    <table class="data-table" id="product-table">
+        <thead>
+        <tr>
+            <th>Nama Produk</th>
+            <th>Harga</th>
+            <th>Status Stok</th>
+            <th style="width: 220px;">Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="product-name">Rose Symphony Bouquet</td>
+            <td class="product-price">Rp 485.000</td>
+            <td><span class="status tersedia">Tersedia</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn edit"><i class="fa-solid fa-pencil"></i> Edit</button>
+                    <button class="action-btn delete"><i class="fa-solid fa-trash"></i> Hapus</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-name">Black Pink Bouquet</td>
+            <td class="product-price">Rp 510.000</td>
+            <td><span class="status tersedia">Tersedia</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn edit"><i class="fa-solid fa-pencil"></i> Edit</button>
+                    <button class="action-btn delete"><i class="fa-solid fa-trash"></i> Hapus</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="product-name">Valentina Bouquet</td>
+            <td class="product-price">Rp 735.000</td>
+            <td><span class="status habis">Habis</span></td>
+            <td>
+                <div class="action-buttons">
+                    <button class="action-btn edit"><i class="fa-solid fa-pencil"></i> Edit</button>
+                    <button class="action-btn delete"><i class="fa-solid fa-trash"></i> Hapus</button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // === AKSI UNTUK RIWAYAT PEMBELIAN ===
+        const historyTable = document.getElementById('history-table');
+        if (historyTable) {
+            historyTable.addEventListener('click', function (e) {
+                // Aksi untuk tombol "Tandai Selesai"
+                if (e.target.classList.contains('action-button') && !e.target.disabled) {
+                    const button = e.target;
+                    const statusCell = button.parentElement.previousElementSibling.querySelector('.status');
+
+                    statusCell.classList.remove('menunggu');
+                    statusCell.classList.add('selesai');
+                    statusCell.textContent = 'Selesai';
+
+                    button.textContent = 'Selesai';
+                    button.disabled = true;
+                }
+            });
+        }
+
+        // === AKSI UNTUK KONTROL PRODUK ===
+        const productTableBody = document.querySelector('#product-table tbody');
+        const addProductBtn = document.getElementById('add-product-btn');
+
+        // Aksi untuk tombol Tambah, Hapus, Edit, dan Status Stok
+        if (productTableBody) {
+            productTableBody.addEventListener('click', function (e) {
+                const target = e.target;
+                const row = target.closest('tr');
+
+                // Aksi Hapus Produk
+                if (target.classList.contains('delete') || target.closest('.delete')) {
+                    if (confirm('Anda yakin ingin menghapus produk ini?')) {
+                        row.remove();
+                    }
+                }
+
+                // Aksi Edit & Simpan Produk
+                if (target.classList.contains('edit') || target.closest('.edit')) {
+                    const editBtn = row.querySelector('.edit');
+                    const nameCell = row.querySelector('.product-name');
+                    const priceCell = row.querySelector('.product-price');
+
+                    // Ubah Teks menjadi Input Field
+                    nameCell.innerHTML = `<input type="text" class="editable-input" value="${nameCell.textContent}">`;
+                    priceCell.innerHTML = `<input type="text" class="editable-input" value="${priceCell.textContent}">`;
+
+                    // Ubah Tombol Edit menjadi Simpan
+                    editBtn.innerHTML = `<i class="fa-solid fa-save"></i> Simpan`;
+                    editBtn.classList.remove('edit');
+                    editBtn.classList.add('save');
+                } else if (target.classList.contains('save') || target.closest('.save')) {
+                    const saveBtn = row.querySelector('.save');
+                    const nameInput = row.querySelector('.product-name input');
+                    const priceInput = row.querySelector('.product-price input');
+
+                    // Ubah Input Field kembali menjadi Teks
+                    row.querySelector('.product-name').textContent = nameInput.value;
+                    row.querySelector('.product-price').textContent = priceInput.value;
+
+                    // Ubah Tombol Simpan kembali menjadi Edit
+                    saveBtn.innerHTML = `<i class="fa-solid fa-pencil"></i> Edit`;
+                    saveBtn.classList.remove('save');
+                    saveBtn.classList.add('edit');
+                }
+
+                // Aksi Toggle Status Stok
+                if (target.classList.contains('status')) {
+                    if (target.classList.contains('tersedia')) {
+                        target.classList.remove('tersedia');
+                        target.classList.add('habis');
+                        target.textContent = 'Habis';
+                    } else {
+                        target.classList.remove('habis');
+                        target.classList.add('tersedia');
+                        target.textContent = 'Tersedia';
+                    }
+                }
+            });
+        }
+
+        // Aksi untuk Tombol "+ Tambah Produk Baru"
+        if (addProductBtn) {
+            addProductBtn.addEventListener('click', function () {
+                const name = prompt("Masukkan nama produk baru:");
+                if (!name) return; // Batal jika user tidak mengisi nama
+
+                const price = prompt("Masukkan harga produk baru (contoh: Rp 123.000):");
+                if (!price) return; // Batal jika user tidak mengisi harga
+
+                // Buat baris baru untuk tabel
+                const newRow = `
+                <tr>
+                    <td class="product-name">${name}</td>
+                    <td class="product-price">${price}</td>
+                    <td><span class="status tersedia">Tersedia</span></td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="action-btn edit"><i class="fa-solid fa-pencil"></i> Edit</button>
+                            <button class="action-btn delete"><i class="fa-solid fa-trash"></i> Hapus</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+                productTableBody.insertAdjacentHTML('beforeend', newRow);
+            });
+        }
+    });
+</script>
+</body>
+</html>
