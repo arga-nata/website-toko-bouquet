@@ -15,13 +15,11 @@
             rel="stylesheet"
     />
     <style>
-        /* Aturan Grid untuk 5 Kolom */
         .product-grid {
             grid-template-columns: repeat(5, 1fr);
-            gap: 1rem; /* Mengurangi jarak agar pas untuk 5 kolom */
+            gap: 1rem;
         }
 
-        /* Mengurangi ukuran font agar muat di kartu yang lebih kecil */
         .product-title {
             font-size: 1.1rem;
         }
@@ -30,8 +28,6 @@
             font-size: 0.85rem;
         }
 
-
-        /* Style untuk Kontrol Kuantitas */
         .quantity-control {
             display: flex;
             align-items: center;
@@ -62,7 +58,7 @@
             border-right: 1px solid #ccc;
             font-weight: 600;
             padding: 8px;
-            -moz-appearance: textfield; /* Firefox */
+            -moz-appearance: textfield;
         }
 
         .quantity-control input[type="number"]::-webkit-inner-spin-button,
@@ -72,10 +68,10 @@
         }
 
         .popup-container .form-group {
-            margin-bottom: 1.2rem; /* Memberi jarak antar grup form */
+            margin-bottom: 1.2rem;
         }
 
-        /* CSS UNTUK OPSI PENGIRIMAN */
+
         .radio-options-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -83,7 +79,6 @@
         }
 
         .radio-input {
-            /* Sembunyikan radio button asli */
             position: absolute;
             opacity: 0;
             width: 0;
@@ -114,18 +109,16 @@
             background-color: #f5f5f5;
         }
 
-        /* Style saat radio button TERPILIH */
         .radio-input:checked + .radio-label {
-            border-color: var(--primary, #007bff); /* Ganti dengan warna primer Anda jika ada */
+            border-color: var(--primary, #007bff);
             color: var(--primary, #007bff);
-            background-color: var(--light, #e7f3ff); /* Warna latar lebih terang */
+            background-color: var(--light, #e7f3ff);
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
         }
 
-        /* Style Footer Tema Gelap yang Diperbarui */
         footer {
-            background-color: #111827; /* Warna hitam kebiruan yang sangat gelap */
-            color: #9ca3af; /* Abu-abu terang untuk teks biasa */
+            background-color: #111827;
+            color: #9ca3af;
             padding: 4rem 2rem 2rem 2rem;
         }
 
@@ -145,7 +138,6 @@
             position: relative;
         }
 
-        /* Garis bawah dekoratif untuk judul */
         .footer-column h3::after {
             content: '';
             position: absolute;
@@ -224,7 +216,6 @@
             font-size: 0.9rem;
         }
 
-        /* Login Popup Styles */
         .login-overlay {
             position: fixed;
             top: 0;
@@ -488,8 +479,6 @@
         </div>
     </section>
 </main>
-
-<!-- Footer Tema Gelap yang Telah Diperbarui -->
 <footer>
     <div class="footer-container">
         <div class="footer-column">
@@ -589,7 +578,6 @@
     </div>
 </div>
 <script>
-    // Script tidak ada perubahan
     const buyButtons = document.querySelectorAll(".buy-button-trigger");
     const orderPopupOverlay = document.getElementById("orderPopupOverlay");
     const cancelOrderBtn = document.getElementById("cancelOrderBtn");
@@ -709,7 +697,7 @@
             messageBox.addEventListener("transitionend", () => messageBox.remove());
         }, 3000);
     });
-    // Script untuk Login Popup
+
     const adminLink = document.getElementById('admin-link');
     const loginPopup = document.getElementById('login-popup');
     const loginForm = document.getElementById('login-form');
@@ -731,9 +719,7 @@
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        // INI HANYA SIMULASI, TIDAK AMAN UNTUK PRODUKSI
         if (username === 'admin' && password === 'wiwid123') {
-            // Jika berhasil, arahkan ke halaman admin
             window.location.href = 'admin.html';
         } else {
             loginError.textContent = 'Username atau password salah!';
