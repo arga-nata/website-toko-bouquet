@@ -302,6 +302,14 @@
                     <i class="fa-solid fa-house"></i>Beranda
                 </a>
             </li>
+
+            <li>
+                <a href="order.html">
+                    <i class="fa-solid fa-envelope"></i>
+                    Order
+                </a>
+            </li>
+
             <li>
                 <a href="produk.html"> <i class="fa-solid fa-store"></i>Produk </a>
             </li>
@@ -309,16 +317,6 @@
                 <a href="keranjang.html">
                     <i class="fa-solid fa-cart-shopping"></i>
                     Keranjang
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fa-solid fa-address-book"></i>Kontak
-                </a>
-            </li>
-            <li>
-                <a href="#" id="admin-link">
-                    <i class="fa-solid fa-lock"></i>Admin
                 </a>
             </li>
         </ul>
@@ -358,21 +356,12 @@
                         src="images/Rose-Symphony-Bouquet.jpg"
                         alt="Rose Symphony Bouquet"
                 />
-            </div>
-            <div class="product-content">
+                </div>
+                <div class="product-content">
                 <h3 class="product-title">Rose Symphony Bouquet</h3>
                 <p class="product-description">
                     Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan, dan Ketulusan.
                 </p>
-                <span class="product-price">Rp 485.000 </span>
-                <span class="product-stock"
-                ><i class="fa-solid fa-check"></i>Tersedia</span
-                >
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small">
-                        <i class="fa-solid fa-cart-plus"></i>Tambah Keranjang
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -388,15 +377,6 @@
                 <p class="product-description">
                     Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine, Ulang Tahun, dan lainnya.
                 </p>
-                <span class="product-price">Rp 510.000</span>
-                <span class="product-stock"
-                ><i class="fa-solid fa-xmark"></i>Habis</span
-                >
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small">
-                        <i class="fa-solid fa-cart-plus"></i>Tambah Keranjang
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -409,15 +389,6 @@
                 <p class="product-description">
                     Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine, Ulang Tahun, dan lainnya.
                 </p>
-                <span class="product-price">Rp 885.000</span>
-                <span class="product-stock"
-                ><i class="fa-solid fa-check"></i>Tersedia</span
-                >
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small">
-                        <i class="fa-solid fa-cart-plus"></i>Tambah Keranjang
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -430,15 +401,6 @@
                 <p class="product-description">
                     Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk Hadiah Orang Terkasih.
                 </p>
-                <span class="product-price">Rp 735.000</span>
-                <span class="product-stock"
-                ><i class="fa-solid fa-check"></i>Tersedia</span
-                >
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small">
-                        <i class="fa-solid fa-cart-plus"></i>Tambah Keranjang
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -453,14 +415,6 @@
                 <p class="product-description">
                     Rangkaian bunga matahari ceria untuk mencerahkan hari siapa pun yang menerimanya.
                 </p>
-                <span class="product-price">Rp 350.000</span>
-                <span class="product-stock"
-                ><i class="fa-solid fa-xmark"></i>Habis</span
-                >
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small">
-                        <i class="fa-solid fa-cart-plus"></i>Tambah Keranjang
-                    </button>
                 </div>
             </div>
         </div>
@@ -500,65 +454,6 @@
         <p>&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
     </div>
 </footer>
-
-<div id="orderPopupOverlay" class="modal-overlay">
-    <div class="popup-container">
-        <h2 class="popup-header">Detail Pesanan Anda</h2>
-
-        <form id="orderForm">
-            <div class="form-group">
-                <label>Jumlah Pesanan:</label>
-                <div class="quantity-control">
-                    <button type="button" id="decreaseBtn">-</button>
-                    <input id="quantityInput" type="number" value="1" min="1">
-                    <button type="button" id="increaseBtn">+</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="deliveryDate">Tanggal Pengiriman:</label>
-                <input type="date" id="deliveryDate" name="deliveryDate"/>
-            </div>
-
-            <div class="form-group">
-                <label>Opsi Pengambilan:</label>
-                <div class="radio-options-container">
-                    <div>
-                        <input type="radio" id="optionDelivery" name="deliveryOption" value="dikirim"
-                               class="radio-input" checked>
-                        <label for="optionDelivery" class="radio-label">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            <span>Antarin</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="optionPickup" name="deliveryOption" value="ambil_sendiri"
-                               class="radio-input">
-                        <label for="optionPickup" class="radio-label">
-                            <i class="fa-solid fa-person-walking-luggage"></i>
-                            <span>Ambil Sendiri</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="orderMessage">Pesan (opsional):</label>
-                <textarea id="orderMessage" name="orderMessage"
-                          placeholder="Contoh: Tolong bungkus dengan rapi."></textarea>
-            </div>
-
-            <div class="nav-links">
-                <button type="button" id="cancelOrderBtn" class="btn-outline-small">
-                    Batal
-                </button>
-                <button type="submit" id="confirmOrderBtn" class="btn-primary-small">
-                    Konfirmasi Pesanan
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
 <div id="login-popup" class="login-overlay">
     <div class="popup-content">
         <h2>Login Admin</h2>
@@ -578,126 +473,6 @@
     </div>
 </div>
 <script>
-    const buyButtons = document.querySelectorAll(".buy-button-trigger");
-    const orderPopupOverlay = document.getElementById("orderPopupOverlay");
-    const cancelOrderBtn = document.getElementById("cancelOrderBtn");
-    const orderForm = document.getElementById("orderForm");
-    const deliveryDateInput = document.getElementById("deliveryDate");
-    const decreaseBtn = document.getElementById('decreaseBtn');
-    const increaseBtn = document.getElementById('increaseBtn');
-    const quantityInput = document.getElementById('quantityInput');
-
-    function showPopup() {
-        orderPopupOverlay.classList.add("show");
-        const today = new Date().toISOString().split('T')[0];
-        deliveryDateInput.setAttribute('min', today);
-        deliveryDateInput.value = today;
-        updateQuantity(1);
-    }
-
-    function hidePopup() {
-        orderPopupOverlay.classList.remove("show");
-    }
-
-    buyButtons.forEach((button) => {
-        button.addEventListener("click", showPopup);
-    });
-
-    cancelOrderBtn.addEventListener("click", hidePopup);
-
-    orderPopupOverlay.addEventListener("click", (event) => {
-        if (event.target === orderPopupOverlay) {
-            hidePopup();
-        }
-    });
-
-    let quantity = 1;
-    let intervalId = null;
-    let timeoutId = null;
-
-    const updateQuantity = (newQuantity) => {
-        const num = parseInt(newQuantity, 10);
-        quantity = isNaN(num) || num < 1 ? 1 : num;
-        quantityInput.value = quantity;
-    };
-
-    const increase = () => updateQuantity(quantity + 1);
-    const decrease = () => updateQuantity(quantity - 1);
-
-    const startChanging = (changeFunction) => {
-        changeFunction();
-        timeoutId = setTimeout(() => {
-            intervalId = setInterval(changeFunction, 100);
-        }, 400);
-    };
-
-    const stopChanging = () => {
-        clearTimeout(timeoutId);
-        clearInterval(intervalId);
-    };
-
-    quantityInput.addEventListener('input', () => {
-        updateQuantity(quantityInput.value);
-    });
-
-    ['mousedown', 'touchstart'].forEach(type => {
-        increaseBtn.addEventListener(type, (e) => {
-            e.preventDefault();
-            startChanging(increase);
-        });
-        decreaseBtn.addEventListener(type, (e) => {
-            e.preventDefault();
-            startChanging(decrease);
-        });
-    });
-    ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(type => {
-        document.body.addEventListener(type, stopChanging);
-    });
-
-    orderForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const quantity = quantityInput.value;
-        const deliveryDate = deliveryDateInput.value;
-        const deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value;
-        const message = document.getElementById("orderMessage").value;
-
-        console.log("Detail Pesanan:", {
-            jumlah: quantity,
-            tanggalPengiriman: deliveryDate,
-            opsiPengiriman: deliveryOption,
-            pesan: message,
-        });
-
-        hidePopup();
-
-        const messageBox = document.createElement("div");
-        messageBox.textContent = "Pesanan Anda telah ditambahkan, silakan cek Keranjang!";
-        messageBox.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #4CAF50;
-                color: white;
-                padding: 15px 25px;
-                border-radius: 8px;
-                z-index: 1100;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                opacity: 0;
-                transition: opacity 0.5s ease;
-            `;
-        document.body.appendChild(messageBox);
-
-        setTimeout(() => {
-            messageBox.style.opacity = "1";
-        }, 50);
-
-        setTimeout(() => {
-            messageBox.style.opacity = "0";
-            messageBox.addEventListener("transitionend", () => messageBox.remove());
-        }, 3000);
-    });
-
     const adminLink = document.getElementById('admin-link');
     const loginPopup = document.getElementById('login-popup');
     const loginForm = document.getElementById('login-form');
