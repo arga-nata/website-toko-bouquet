@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="style.css"/>
-    <link rel="icon" type="image/x-icon" href="images/Logo.png"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="images/Logo.png" />
     <title>Produk - WB Bouquet Shop</title>
-    <script
-            src="https://kit.fontawesome.com/9462eee823.js"
-            crossorigin="anonymous"
-    ></script>
-    <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-    />
+    <script src="https://kit.fontawesome.com/9462eee823.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
     <style>
-        .product-grid {
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-        }
 
         .product-title {
             font-size: 1.1rem;
@@ -110,7 +102,7 @@
             background-color: #f5f5f5;
         }
 
-        .radio-input:checked + .radio-label {
+        .radio-input:checked+.radio-label {
             border-color: var(--primary, #007bff);
             color: var(--primary, #007bff);
             background-color: var(--light, #e7f3ff);
@@ -255,430 +247,162 @@
         }
     </style>
 </head>
+
 <body>
-<header class="header">
-    <nav class="navbar">
-        <a href="index.html" class="logo_brand">
-            <img src="images/Logo.png" alt="Logo"/>
-            <span>Wiwid Beauty | Bouquet Shop</span>
-        </a>
-        <ul class="nav-links">
-            <li>
-                <a href="index.html">
-                    <i class="fa-solid fa-house"></i>Beranda
-                </a>
-            </li>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo_brand">
+                <img src="images/Logo.png" alt="Logo" />
+                <span>Wiwid Beauty | Bouquet Shop</span>
+            </a>
+            <ul class="nav-links">
+                <li>
+                    <a href="index.html">
+                        <i class="fa-solid fa-house"></i>Beranda
+                    </a>
+                </li>
 
-             <li>
-                <a href="order.html">
-                    <i class="fa-solid fa-envelope"></i>
-                    Order
-                </a>
-            </li>
+                <li>
+                    <a href="order.html">
+                        <i class="fa-solid fa-envelope"></i>
+                        Order
+                    </a>
+                </li>
 
-            <li>
-                <a href="produk.html" class="active"> <i class="fa-solid fa-store"></i>Produk </a>
-            </li>
-            <li>
-                <a href="keranjang.html">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    Keranjang
-                </a>
-            </li>
-
-        </ul>
-    </nav>
-</header>
-<main>
-    <div class="category-filter">
-        <button class="category-btn active">Semua</button>
-        <button class="category-btn">Kategori A</button>
-        <button class="category-btn">Kategori B</button>
-        <button class="category-btn">Kategori C</button>
-        <button class="category-btn">Kategori Custom</button>
-    </div>
-
-    <div class="product-grid">
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Rose-Symphony-Bouquet.jpg" alt="Rose Symphony Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Rose Symphony Bouquet</h3>
-                <p class="product-description">Hadiah Sempurna Mother's Day yang Melambangkan Cinta, Kehangatan, dan
-                    Ketulusan</p>
-                <span class="product-price">Rp 485.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
+                <li>
+                    <a href="produk.html" class="active"> <i class="fa-solid fa-store"></i>Produk </a>
+                </li>
+                <li>
+                    <a href="keranjang.html">
+                        <i class="fa-solid fa-cart-shopping"></i>
                         Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
+                    </a>
+                </li>
 
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Pink-Perfect-Bouquet.jpg" alt="Black Pink Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Black Pink Bouquet</h3>
-                <p class="product-description">Melengkapi Perayaan Momen Spesial Apapun, seperti Hari Valentine, Ulang
-                    Tahun, dan lainnya</p>
-                <span class="product-price">Rp 510.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Rosy-ColourPop-Bouquet.jpg"
-                     alt="Rosy ColourPop Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Rosy ColourPop Bouquet</h3>
-                <p class="product-description">Melengkapi Perayaan Momen Spesial apapun, seperti Hari Valentine, Ulang
-                    Tahun, dan lainnya</p>
-                <span class="product-price">Rp 885.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Valentina-Bouquet.jpg" alt="Valentina Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Valentina Bouquet</h3>
-                <p class="product-description">Kombinasi 40 Tangkai Mawar dengan Daun Silver Dolla, cocok untuk Hadiah
-                    Orang Terkasih.</p>
-                <span class="product-price">Rp 735.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Two-Shades-of-Love-Bouquet.jpg" alt="Two Shades of Love Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Two Shades of Love Bouquet</h3>
-                <p class="product-description">Hadiah Romantis untuk Momen Spesial seperti Hari Valentine</p>
-                <span class="product-price">Rp 480.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Butaro.jpg" alt="Cuddlemate Butarro Bear"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Cuddlemate Butarro Bear</h3>
-                <p class="product-description"> Cocok Dijadikan Sebagai Kado Anniversary, Bachelorette, Ulang Tahun, dan
-                    Valentine</p>
-                <span class="product-price">Rp 125.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Prudence-Artificial.jpg" alt="Prudence Artificial"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Prudence Artificial</h3>
-                <p class="product-description"> Dilengkapi Aksesori Burung dan Dirangkai dalam Vas Bulat Besar, cocok
-                    untuk Ulang Tahun, Wisuda, Anniversary, hingga Valentine</p>
-                <span class="product-price">Rp 785.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/Joyful-night.jpg" alt="Joyful Night Artificial"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Joyful Night Artificial</h3>
-                <p class="product-description">Terdiri dari White Pampas, Green Pine Dusty, Pine Cone, Mini Nutcrackers,
-                    dan Decorative Ball in Gold, dihias dengan Pita Nuansa Natal</p>
-                <span class="product-price">Rp 935.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-outline-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="https://placehold.co/400x400/86efac/333333?text=Orchid+Elegance"
-                     alt="Orchid Elegance Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Orchid Elegance</h3>
-                <p class="product-description">Rangkaian anggun dari bunga anggrek pilihan, melambangkan keindahan dan
-                    kemewahan.</p>
-                <span class="product-price">Rp 950.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia: 5 item</span>
-                <div class="product-buttons">
-                    <a href="detail_produk.html" class="btn-outline-small"><i class="fa-solid fa-circle-info"></i>
-                        Detail</a>
-                    <button class="buy-button-trigger btn-primary-small"><i class="fa-solid fa-cart-plus"></i>Beli
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image">
-                <img src="images/flower_item_6.jpeg"
-                     alt="Graduation Bear Bouquet"/>
-            </div>
-            <div class="product-content">
-                <h3 class="product-title">Graduation Bear</h3>
-                <p class="product-description">Hadiah kelulusan sempurna dengan boneka wisuda lucu dan bunga-bunga
-                    segar.</p>
-                <span class="product-price">Rp 375.000</span>
-                <span class="product-stock"><i class="fa-solid fa-check"></i>Tersedia</span>
-                <div class="product-buttons">
-                    <button class="buy-button-trigger btn-primary-small"><i class="fa-solid fa-cart-plus"></i>Tambah
-                        Keranjang
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</main>
-
-<footer>
-    <div class="footer-container">
-        <div class="footer-column">
-            <h3>Wiwid Bouquet</h3>
-            <p>Merangkai cerita Anda dalam keindahan yang tak terlupakan. Temukan buket yang bukan hanya indah
-                dipandang, tapi juga hangat di hati.</p>
-        </div>
-        <div class="footer-column">
-            <h3>Hubungi Kami</h3>
-            <ul>
-                <li><i class="fa-solid fa-location-dot"></i><span>Jl. Raya Talok, Garum, Blitar</span></li>
-                <li><a href="tel:+628123456789"><i class="fa-solid fa-phone"></i><span>+62 812-3456-7890</span></a></li>
-                <li><a href="#"><i class="fab fa-instagram"></i><span>@wiwidbouquet</span></a></li>
             </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
-    </div>
-</footer>
-
-<div id="orderPopupOverlay" class="modal-overlay">
-    <div class="popup-container">
-        <h2 class="popup-header">Detail Pesanan Anda</h2>
-        <form id="orderForm">
-            <div class="form-group">
-                <label>Jumlah Pesanan:</label>
-                <div class="quantity-control">
-                    <button type="button" id="decreaseBtn">-</button>
-                    <input id="quantityInput" type="number" value="1" min="1">
-                    <button type="button" id="increaseBtn">+</button>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="deliveryDate">Tanggal Pengiriman:</label>
-                <input type="date" id="deliveryDate" name="deliveryDate"/>
-            </div>
-            <div class="form-group">
-                <label>Opsi Pengambilan:</label>
-                <div class="radio-options-container">
-                    <div>
-                        <input type="radio" id="optionDelivery" name="deliveryOption" value="dikirim"
-                               class="radio-input" checked>
-                        <label for="optionDelivery" class="radio-label">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            <span>Antarin</span>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="radio" id="optionPickup" name="deliveryOption" value="ambil_sendiri"
-                               class="radio-input">
-                        <label for="optionPickup" class="radio-label">
-                            <i class="fa-solid fa-person-walking-luggage"></i>
-                            <span>Ambil Sendiri</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="orderMessage">Pesan (opsional):</label>
-                <textarea id="orderMessage" name="orderMessage"
-                          placeholder="Contoh: Tolong bungkus dengan rapi."></textarea>
-            </div>
-            <div class="nav-links">
-                <button type="button" id="cancelOrderBtn" class="btn-outline-small">
-                    Batal
-                </button>
-                <button type="submit" id="confirmOrderBtn" class="btn-primary-small">
-                    Konfirmasi Pesanan
-                </button>
-            </div>
+        </nav>
+    </header>
+    <main>
+        <form class="category-filter">
+            <button class="category-btn active">Semua</button>
+            <button class="category-btn">Kategori A</button>
+            <button class="category-btn">Kategori B</button>
+            <button class="category-btn">Kategori C</button>
+            <button class="category-btn">Kategori Custom</button>
         </form>
+
+            <ul class="product-list">
+            
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_2.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_3.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img"  src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+
+                <li class="product">
+                    <div class="product-image">
+                        <img class="showcase-img" src="images/flower_item_1.jpg" alt="flower_item_1" />
+                    </div>
+                </li>
+        </ul>  
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Wiwid Bouquet</h3>
+                <p>Merangkai cerita Anda dalam keindahan yang tak terlupakan. Temukan buket yang bukan hanya indah
+                    dipandang, tapi juga hangat di hati.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Hubungi Kami</h3>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i><span>Jl. Raya Talok, Garum, Blitar</span></li>
+                    <li><a href="tel:+628123456789"><i class="fa-solid fa-phone"></i><span>+62 812-3456-7890</span></a>
+                    </li>
+                    <li><a href="https://www.instagram.com/wiwidbeauty/" target="_blank"><span>@wiwidbeauty</span></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
+        </div>
+    </footer>
+    <div id="image-viewer">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="full-image">
     </div>
-</div>
+    <script>
 
-<script>
-    const buyButtons = document.querySelectorAll(".buy-button-trigger");
-    const orderPopupOverlay = document.getElementById("orderPopupOverlay");
-    const cancelOrderBtn = document.getElementById("cancelOrderBtn");
-    const orderForm = document.getElementById("orderForm");
-    const deliveryDateInput = document.getElementById("deliveryDate");
-    const decreaseBtn = document.getElementById('decreaseBtn');
-    const increaseBtn = document.getElementById('increaseBtn');
-    const quantityInput = document.getElementById('quantityInput');
+        const imageViewer = document.getElementById('image-viewer');
+        const modalImg = document.getElementById('full-image');
+        const images = document.querySelectorAll('.showcase-img');
+        const closeBtn = document.querySelector('#image-viewer .close');
 
-    function showPopup() {
-        orderPopupOverlay.classList.add("show");
-        const today = new Date().toISOString().split('T')[0];
-        deliveryDateInput.setAttribute('min', today);
-        deliveryDateInput.value = today;
-        updateQuantity(1);
-    }
+        images.forEach(img => {
+            img.addEventListener('click', function () {
+                imageViewer.style.display = 'flex';
+                modalImg.src = this.src;
+            });
+        });
 
-    function hidePopup() {
-        orderPopupOverlay.classList.remove("show");
-    }
-
-    buyButtons.forEach((button) => {
-        button.addEventListener("click", showPopup);
-    });
-
-    cancelOrderBtn.addEventListener("click", hidePopup);
-
-    orderPopupOverlay.addEventListener("click", (event) => {
-        if (event.target === orderPopupOverlay) {
-            hidePopup();
+        function closeViewer() {
+            imageViewer.style.display = 'none';
         }
-    });
 
-    let quantity = 1;
-    let intervalId = null;
-    let timeoutId = null;
+        closeBtn.addEventListener('click', closeViewer);
 
-    const updateQuantity = (newQuantity) => {
-        const num = parseInt(newQuantity, 10);
-        quantity = isNaN(num) || num < 1 ? 1 : num;
-        quantityInput.value = quantity;
-    };
-
-    const increase = () => updateQuantity(quantity + 1);
-    const decrease = () => updateQuantity(quantity - 1);
-
-    const startChanging = (changeFunction) => {
-        changeFunction();
-        timeoutId = setTimeout(() => {
-            intervalId = setInterval(changeFunction, 100);
-        }, 400);
-    };
-
-    const stopChanging = () => {
-        clearTimeout(timeoutId);
-        clearInterval(intervalId);
-    };
-
-    quantityInput.addEventListener('input', () => {
-        updateQuantity(quantityInput.value);
-    });
-
-    ['mousedown', 'touchstart'].forEach(type => {
-        increaseBtn.addEventListener(type, (e) => {
-            e.preventDefault();
-            startChanging(increase);
-        });
-        decreaseBtn.addEventListener(type, (e) => {
-            e.preventDefault();
-            startChanging(decrease);
-        });
-    });
-    ['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(type => {
-        document.body.addEventListener(type, stopChanging);
-    });
-
-    orderForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const quantity = quantityInput.value;
-        const deliveryDate = deliveryDateInput.value;
-        const deliveryOption = document.querySelector('input[name="deliveryOption"]:checked').value;
-        const message = document.getElementById("orderMessage").value;
-
-        console.log("Detail Pesanan:", {
-            jumlah: quantity,
-            tanggalPengiriman: deliveryDate,
-            opsiPengiriman: deliveryOption,
-            pesan: message,
+        imageViewer.addEventListener('click', function (e) {
+            if (e.target === imageViewer) {
+                closeViewer();
+            }
         });
 
-        hidePopup();
 
-        const messageBox = document.createElement("div");
-        messageBox.textContent = "Pesanan Anda telah ditambahkan, silakan cek Keranjang!";
-        messageBox.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #4CAF50;
-                color: white;
-                padding: 15px 25px;
-                border-radius: 8px;
-                z-index: 1100;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                opacity: 0;
-                transition: opacity 0.5s ease;
-            `;
-        document.body.appendChild(messageBox);
-
-        setTimeout(() => {
-            messageBox.style.opacity = "1";
-        }, 50);
-
-        setTimeout(() => {
-            messageBox.style.opacity = "0";
-            messageBox.addEventListener("transitionend", () => messageBox.remove());
-        }, 3000);
-    });
-</script>
+    </script>
 </body>
+
 </html>
