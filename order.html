@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="icon" type="image/x-icon" href="images/cat.png"/>
+    <title>Beranda - WB Bouquet Shop</title>
+    <script
+            src="https://kit.fontawesome.com/9462eee823.js"
+            crossorigin="anonymous"
+    ></script>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+    />
+    <header class="header">
+    <nav class="navbar">
+        <a href="index.html" class="logo_brand">
+            <img src="images/Logo.png" alt="Logo"/>
+            <span>Wiwid Beauty | Bouquet Shop</span>
+        </a>
+        <ul class="nav-links">
+            <li>
+                <a href="index.html" >
+                    <i class="fa-solid fa-house"></i>Beranda
+                </a>
+            </li>
+
+             <li>
+                <a href="order.html" class="active">
+                    <i class="fa-solid fa-envelope"></i>
+                    Order
+                </a>
+            </li>
+
+            <li>
+                <a href="produk.html"> <i class="fa-solid fa-store"></i>Produk </a>
+            </li>
+            <li>
+                <a href="keranjang.html">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    Keranjang
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Pemesanan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Base Styles */
+        :root {
+            --primary-color: #240046; /* A nice, modern blue */
+            --primary-hover-color: #357ABD;
+            --background-color: #f4f7f6;
+            --form-background-color: #ffffff;
+            --text-color: #333333;
+            --label-color: #555555;
+            --border-color: #dddddd;
+            --border-focus-color: #4A90E2;
+            --error-color: #D0021B;
+            --success-color: #7ED321;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Form Container */
+        .form-container-order {
+            margin: auto;
+            width: 100%;
+            max-width: 700px;
+            background-color: var(--form-background-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            animation: fadeIn 1s ease-out forwards; /* 1 second duration, ease-out timing, maintains final state */
+            opacity: 0;
+        }
+
+        .form-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .form-header p {
+            font-size: 1rem;
+            color: var(--label-color);
+            margin-bottom: 2rem;
+        }
+
+        /* Form Grouping */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Labels */
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--label-color);
+            font-size: 0.9rem;
+        }
+
+        /* General Input, Select, Textarea Styles */
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background-color: #fff;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--border-focus-color);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Styling for Select Dropdown Arrow */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        /* Radio Button Group */
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            flex-grow: 1;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+
+        .radio-option:hover {
+            border-color: #b0b0b0;
+        }
+        
+        .radio-option input[type="radio"] {
+            display: none; /* Hide the default radio button */
+        }
+        
+        .radio-option .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            display: grid;
+            place-items: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .radio-option .custom-radio::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .radio-option input[type="radio"]:checked + .custom-radio {
+            border-color: var(--primary-color);
+        }
+
+        .radio-option input[type="radio"]:checked + .custom-radio::before {
+            transform: scale(1);
+        }
+
+        .radio-option input[type="radio"]:checked ~ span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-hover-color);
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Grid for some fields */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Media Query for smaller screens */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            /* Remove margin bottom from grid items when stacked */
+            .grid-container .form-group {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+         @keyframes fadeIn {
+            from {
+                opacity: 0; /* Start completely transparent */
+                transform: translateY(20px); /* Start slightly below its final position */
+            }
+            to {
+                opacity: 1; /* End fully opaque */
+                transform: translateY(0); /* End at its original position */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container-order">
+        <div class="form-header">
+            <h1>Formulir Pesanan</h1>
+            <p>Silakan isi detail pesanan Anda di bawah ini.</p>
+        </div>
+
+        <form action="#" method="POST">
+            <!-- Name -->
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" placeholder="Contoh: Budi Santoso" required>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+                <label for="alamat">Alamat Lengkap</label>
+                <textarea id="alamat" name="alamat" placeholder="Contoh: Jl. Merdeka No. 17, Jakarta Pusat" required></textarea>
+            </div>
+
+            <!-- WhatsApp Number -->
+            <div class="form-group">
+                <label for="nomer_wa">Nomer WhatsApp</label>
+                <input type="tel" id="nomer_wa" name="nomer_wa" placeholder="Contoh: 081234567890" required>
+            </div>
+
+            <div class="grid-container">
+                 <!-- Order Quantity -->
+                <div class="form-group">
+                    <label for="jumlah_pesanan">Jumlah Pesanan</label>
+                    <input type="number" id="jumlah_pesanan" name="jumlah_pesanan" min="1" value="1" required>
+                </div>
+
+                <!-- Item Category -->
+                <div class="form-group">
+                    <label for="kategori_barang">Kategori Barang</label>
+                    <select id="kategori_barang" name="kategori_barang" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        <option value="pakaian">Pakaian</option>
+                        <option value="aksesoris">Aksesoris</option>
+                        <option value="dekorasi">Dekorasi Rumah</option>
+                        <option value="undangan">Undangan Cetak</option>
+                        <option value="lainnya">Lainnya</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-container">
+                <!-- Color Nuance -->
+                <div class="form-group">
+                    <label for="nuansa_warna">Nuansa Warna</label>
+                    <input type="text" id="nuansa_warna" name="nuansa_warna" placeholder="Contoh: Pastel, Earth tone">
+                </div>
+    
+                <!-- Size -->
+                <div class="form-group">
+                    <label for="ukuran">Ukuran</label>
+                    <input type="text" id="ukuran" name="ukuran" placeholder="Small, Large, Big">
+                </div>
+            </div>
+
+            <!-- Pickup/Delivery Option -->
+            <div class="form-group">
+                <label>Opsi Pengambilan</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="opsi_pengambilan" value="diantar" checked>
+                        <div class="custom-radio"></div>
+                        <span>Diantar</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="opsi_pengambilan" value="diambil_sendiri">
+                        <div class="custom-radio"></div>
+                        <span>Diambil Sendiri</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Optional Message -->
+            <div class="form-group">
+                <label for="pesan">Pesan (Opsional)</label>
+                <textarea id="pesan" name="pesan" placeholder="Tinggalkan catatan tambahan di sini jika ada..."></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+             
+            <a  href="keranjang.html" type="submit" class="btn-outline-small" style="width: 100%; height: 50px; ">Kirim Pesanan</a>
+        </form>
+    </div>
+</body>
+</html>
+</main>
