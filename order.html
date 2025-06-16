@@ -297,6 +297,23 @@
             resize: vertical;
         }
 
+        /* Style tambahan untuk date picker icon */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+        input[type="date"]::-webkit-calendar-picker-indicator:hover {
+            opacity: 1;
+        }
+
+        .preview-img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
     </style>
 </head>
 <body>
@@ -329,6 +346,11 @@
                             class="w-full px-4 py-3 bg-transparent border-none text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-0"
                             placeholder="812-3456-7890" required oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     </div>
+                </div>
+
+                 <div>
+                    <label for="tanggal-acara" class="block text-sm font-medium text-gray-700 mb-1">Untuk Tanggal Berapa</label>
+                    <input type="date" name="tanggal-acara" id="tanggal-acara" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition text-gray-500">
                 </div>
 
             <div class="grid-container">
@@ -366,23 +388,25 @@
                 </div>
             </div>
 
-             <div class="md:col-span-2">
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Unggah Foto Referensi <span class="text-gray-400">(Bisa Dari Instagram @Wiwidbeauty)</span></label>
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg">
-                        <div class="space-y-1 text-center">
+             <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Unggah Foto Referensi <span class="text-gray-400">(Opsional)</span></label>
+                    <div id="drop-zone" class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg transition-colors duration-300">
+                        <div id="upload-prompt" class="space-y-1 text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                             <div class="flex text-sm text-gray-600 justify-center">
                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                     <span>Pilih file</span>
-                                    <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple>
+                                    <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple accept="image/*">
                                 </label>
                                 <p class="pl-1">atau tarik dan lepas</p>
                             </div>
                             <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 10MB</p>
                         </div>
                     </div>
+                    <!-- Kontainer untuk Pratinjau Gambar -->
+                    <div id="preview-container" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
                 </div>
 
             <!-- Pickup/Delivery Option -->
@@ -415,6 +439,96 @@
     </div>
 
     <script>
+
+
+        // Memilih elemen-elemen DOM yang diperlukan
+        const dropZone = document.getElementById('drop-zone');
+        const fileUpload = document.getElementById('file-upload');
+        const previewContainer = document.getElementById('preview-container');
+        const uploadPrompt = document.getElementById('upload-prompt');
+
+        // Mencegah perilaku default browser saat file di-drag
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Memberi efek visual saat file di-drag di atas zona drop
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('border-indigo-600', 'bg-indigo-50'), false);
+        });
+
+        // Menghilangkan efek visual saat file meninggalkan zona drop
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('border-indigo-600', 'bg-indigo-50'), false);
+        });
+
+        // Menangani file yang di-drop
+        dropZone.addEventListener('drop', handleDrop, false);
+        
+        // Menangani file yang dipilih lewat dialog
+        fileUpload.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function handleDrop(e) {
+            let dt = e.dataTransfer;
+            let files = dt.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            // Sembunyikan prompt awal
+            uploadPrompt.style.display = 'none';
+            // Kosongkan kontainer pratinjau setiap kali ada file baru
+            previewContainer.innerHTML = ''; 
+
+            // Ubah FileList menjadi array dan proses setiap file
+            [...files].forEach(file => {
+                // Pastikan file adalah gambar
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        // Buat div untuk setiap gambar pratinjau
+                        const div = document.createElement('div');
+                        div.classList.add('relative');
+                        
+                        // Buat elemen gambar
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.classList.add('preview-img');
+                        div.appendChild(img);
+
+                        // Tambahkan tombol hapus (opsional)
+                        const removeBtn = document.createElement('button');
+                        removeBtn.innerHTML = '&times;';
+                        removeBtn.classList.add('absolute', 'top-1', 'right-1', 'bg-red-500', 'text-white', 'rounded-full', 'w-5', 'h-5', 'flex', 'items-center', 'justify-center', 'text-xs', 'font-bold');
+                        removeBtn.onclick = () => {
+                            div.remove();
+                            // Jika tidak ada gambar lagi, tampilkan kembali prompt
+                            if (previewContainer.childElementCount === 0) {
+                                uploadPrompt.style.display = 'block';
+                            }
+                        };
+                        div.appendChild(removeBtn);
+
+                        // Tambahkan pratinjau ke kontainer
+                        previewContainer.appendChild(div);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+            // Atur file yang dipilih ke input file agar bisa dikirim bersama form
+            fileUpload.files = files;
+        } 
+
         const fullWhatsAppNumber = '+62' + data.whatsappNumber.replace(/^0+/, '');
     </script>
 </body>
