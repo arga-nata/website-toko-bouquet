@@ -1068,3 +1068,16 @@ footer {
             outline: none; /* Remove default focus outline */
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
+
+         input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        /* Style untuk textarea */
+        textarea {
+            resize: vertical;
+        }
