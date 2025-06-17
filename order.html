@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="icon" type="image/x-icon" href="images/Logo.png"/>
+    <link rel="icon" type="image/x-icon" href="images/Logo_round.png"/>
     <title>Order - WB Bouquet Shop</title>
-    <!-- Memuat Tailwind CSS untuk styling (diperlukan oleh komponen upload) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Memuat Font Awesome -->
     <script src="https://kit.fontawesome.com/9462eee823.js" crossorigin="anonymous"></script>
-    <!-- Memuat Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
-        /* Variabel Warna Tema */
         :root {
             --primary: #240046;
             --secondary: #3c096c;
@@ -33,7 +32,6 @@
             --error-bg: #fff5f5;
         }
 
-        /* Reset & Global */
         * {
             margin: 0;
             padding: 0;
@@ -49,7 +47,11 @@
             scroll-behavior: smooth;
         }
 
-        /* Animasi Transisi Halaman */
+        body.fade-out {
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+
         @keyframes page-load-animation {
             from {
                 opacity: 0;
@@ -63,7 +65,6 @@
             animation: page-load-animation 0.5s ease-out;
         }
 
-        /* Header & Navigasi */
         .header {
             background-color: var(--white);
             padding: 0 20px;
@@ -127,7 +128,6 @@
             color: var(--white) !important;
         }
 
-        /* Main Content & Form Container */
         main {
             padding: 3rem 1rem;
         }
@@ -157,11 +157,10 @@
             margin-top: 0.5rem;
         }
 
-        /* Form Styling */
         .form-grid-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem; /* Reduced gap */
+            gap: 1.5rem;
         }
 
         .form-grid {
@@ -207,7 +206,6 @@
             box-shadow: 0 0 0 3px rgba(90, 24, 154, 0.15);
         }
 
-        /* Input Group with Prefix */
         .input-group {
             display: flex;
             align-items: center;
@@ -220,7 +218,7 @@
             border: 1px solid var(--medium-gray);
             border-right: none;
             border-radius: 8px 0 0 8px;
-            height: 49px; /* match input height */
+            height: 49px;
             display: flex;
             align-items: center;
             background-color: var(--light-gray);
@@ -240,9 +238,7 @@
             box-shadow: 0 0 0 3px var(--error-bg) !important;
         }
 
-        /* Menghilangkan panah pada input number */
-        input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
+        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
         }
@@ -251,7 +247,6 @@
             -moz-appearance: textfield;
         }
 
-        /* Image Upload Area */
         #drop-zone {
             cursor: pointer;
         }
@@ -259,7 +254,7 @@
         .preview-item {
             position: relative;
             width: 100%;
-            padding-top: 100%; /* 1:1 Aspect Ratio */
+            padding-top: 100%;
             border-radius: 0.5rem;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -298,8 +293,6 @@
             opacity: 1;
         }
 
-
-        /* Radio Options */
         .radio-options-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -364,7 +357,6 @@
             color: var(--accent);
         }
 
-        /* Buttons */
         .btn {
             padding: 14px 28px;
             border-radius: 8px;
@@ -380,18 +372,55 @@
             text-decoration: none;
         }
 
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: var(--white);
             box-shadow: 0 4px 12px rgba(36, 0, 70, 0.2);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 6px 18px rgba(36, 0, 70, 0.3);
         }
 
-        /* Inline Error Message */
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .btn-outline::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-outline:hover:not(:disabled)::before {
+            transform: scaleX(1);
+        }
+
+        .btn-outline:hover:not(:disabled) {
+            color: var(--white) !important;
+        }
+
         .error-message {
             color: var(--error-text-color);
             font-size: 0.8rem;
@@ -399,7 +428,6 @@
             display: none;
         }
 
-        /* Footer */
         footer {
             background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: var(--white);
@@ -468,30 +496,128 @@
             font-size: 0.95rem;
         }
 
-        .social-links {
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .social-links a {
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 480px;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-cancel-modal {
+            background-color: #e5e7eb;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .btn-cancel-modal:hover {
+            background-color: #d1d5db;
+        }
+
+        #receipt-image-container img {
+            border: 1px solid var(--light-gray);
+            border-radius: 4px;
+            max-width: 100%;
+            margin: 1rem 0;
+        }
+
+        #receipt-template {
+            font-family: 'Fira Code', monospace;
+            background: #fff;
+            color: #000;
+            padding: 20px;
+            width: 320px;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        #receipt-template h4 {
+            text-align: center;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        #receipt-template .subtitle {
+            text-align: center;
+            font-size: 10px;
+            margin-bottom: 15px;
+        }
+
+        #receipt-template .line {
+            border-top: 1px dashed #000;
+            margin: 10px 0;
+        }
+
+        #receipt-template .item-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
         }
 
-        .social-links a:hover {
-            background-color: var(--light-pink);
-            color: var(--primary);
-            transform: translateY(-5px);
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         @media (max-width: 768px) {
@@ -510,7 +636,6 @@
 </head>
 <body>
 
-<!-- Header/Navbar -->
 <header class="header">
     <nav class="navbar">
         <a href="index.html" class="logo_brand">
@@ -526,90 +651,77 @@
     </nav>
 </header>
 
-<!-- Main Content (Formulir) -->
 <main>
     <div class="form-container">
-
         <div class="form-header">
             <h1>Formulir Pemesanan</h1>
             <p>Silakan isi detail pesanan Anda di bawah ini.</p>
         </div>
-
         <form id="orderForm" novalidate>
             <div class="form-grid-wrapper">
-                <!-- SEKSI 1: Info Pemesan -->
                 <div class="form-grid grid-col-2">
-                    <div class="form-group">
-                        <label for="fullName">Nama Lengkap</label>
-                        <input type="text" id="fullName" name="fullName" class="input-field"
-                               placeholder="Contoh: Budi Santoso" required oninput="capitalizeName(this)">
-                        <p class="error-message" id="fullName-error"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="whatsappNumber">Nomor WhatsApp</label>
-                        <div class="input-group" id="whatsapp-group">
-                            <span class="prefix">+62</span>
-                            <input type="tel" id="whatsappNumber" name="whatsappNumber" class="input-field"
-                                   placeholder="812-3456-7890" required oninput="formatPhoneNumber(this)"
-                                   maxlength="15">
+                    <div class="form-group"><label for="fullName">Nama Lengkap</label><input type="text" id="fullName"
+                                                                                             name="fullName"
+                                                                                             class="input-field"
+                                                                                             placeholder="Contoh: Naufal Abbad"
+                                                                                             required
+                                                                                             oninput="capitalizeName(this)">
+                        <p class="error-message" id="fullName-error"></p></div>
+                    <div class="form-group"><label for="whatsappNumber">Nomor WhatsApp</label>
+                        <div class="input-group" id="whatsapp-group"><span class="prefix">+62</span><input type="tel"
+                                                                                                           id="whatsappNumber"
+                                                                                                           name="whatsappNumber"
+                                                                                                           class="input-field"
+                                                                                                           placeholder="812-3456-7890"
+                                                                                                           required
+                                                                                                           oninput="formatPhoneNumber(this)"
+                                                                                                           maxlength="15">
                         </div>
-                        <p class="error-message" id="whatsappNumber-error"></p>
-                    </div>
+                        <p class="error-message" id="whatsappNumber-error"></p></div>
                 </div>
-
-                <!-- SEKSI 2: Jenis Pesanan -->
                 <div class="form-grid grid-col-2">
-                    <div class="form-group">
-                        <label for="kategori_barang">Kategori Produk</label>
-                        <select id="kategori_barang" name="kategori_barang" class="input-field" required>
-                            <option value="" disabled selected>Pilih Kategori</option>
-                            <option value="Buket Bunga">Buket Bunga</option>
-                            <option value="Buket Balon">Buket Balon</option>
-                            <option value="Hampers">Hampers</option>
-                        </select>
-                        <p class="error-message" id="kategori_barang-error"></p>
-                    </div>
-                    <div class="form-group" id="jenis_buket_group">
-                        <label for="jenis_buket">Jenis Produk</label>
-                        <select id="jenis_buket" name="jenis_buket" class="input-field" required>
-                            <option value="" disabled selected>Pilih Jenis</option>
-                        </select>
-                        <p class="error-message" id="jenis_buket-error"></p>
-                    </div>
+                    <div class="form-group"><label for="kategori_barang">Kategori Produk</label><select
+                            id="kategori_barang" name="kategori_barang" class="input-field" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        <option value="Buket Bunga">Buket Bunga</option>
+                        <option value="Buket Balon">Buket Balon</option>
+                        <option value="Hampers">Hampers</option>
+                    </select>
+                        <p class="error-message" id="kategori_barang-error"></p></div>
+                    <div class="form-group" id="jenis_buket_group"><label for="jenis_buket">Jenis Produk</label><select
+                            id="jenis_buket" name="jenis_buket" class="input-field" required>
+                        <option value="" disabled selected>Pilih Jenis</option>
+                    </select>
+                        <p class="error-message" id="jenis_buket-error"></p></div>
                 </div>
-
-                <!-- SEKSI 3: Kustomisasi -->
                 <div class="form-grid grid-col-3">
-                    <div class="form-group">
-                        <label for="jumlah_pesanan">Jumlah</label>
-                        <input type="number" id="jumlah_pesanan" name="jumlah_pesanan" class="input-field" min="1"
-                               value="1" required>
-                        <p class="error-message" id="jumlah_pesanan-error"></p>
-                    </div>
-                    <div class="form-group" id="nuansa_warna_group">
-                        <label for="nuansa_warna">Nuansa Warna</label>
-                        <input type="text" id="nuansa_warna" name="nuansa_warna" class="input-field"
-                               placeholder="Contoh: Pastel, Earth tone">
-                    </div>
-                    <div class="form-group" id="ukuran_group">
-                        <label for="ukuran">Ukuran</label>
-                        <select id="ukuran" name="ukuran" class="input-field" required>
-                            <option value="" disabled selected>Pilih Ukuran</option>
-                            <option value="Small">Small</option>
-                            <option value="Medium">Medium</option>
-                            <option value="Large">Large</option>
-                        </select>
-                        <p class="error-message" id="ukuran-error"></p>
-                    </div>
+                    <div class="form-group"><label for="jumlah_pesanan">Jumlah</label><input type="number"
+                                                                                             id="jumlah_pesanan"
+                                                                                             name="jumlah_pesanan"
+                                                                                             class="input-field" min="1"
+                                                                                             value="1" required>
+                        <p class="error-message" id="jumlah_pesanan-error"></p></div>
+                    <div class="form-group" id="nuansa_warna_group"><label for="nuansa_warna">Nuansa Warna</label><input
+                            type="text" id="nuansa_warna" name="nuansa_warna" class="input-field"
+                            placeholder="Contoh: Pastel, Earth tone"></div>
+                    <div class="form-group" id="ukuran_group"><label for="ukuran">Ukuran</label><select id="ukuran"
+                                                                                                        name="ukuran"
+                                                                                                        class="input-field"
+                                                                                                        required>
+                        <option value="" disabled selected>Pilih Ukuran</option>
+                        <option value="Small">Small</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Large">Large</option>
+                    </select>
+                        <p class="error-message" id="ukuran-error"></p></div>
                 </div>
-
-                <!-- SEKSI 4: Budget & Tanggal -->
                 <div class="form-grid grid-col-2">
                     <div class="form-group">
                         <label for="harga_mulai">Harga Mulai Dari</label>
                         <select id="harga_mulai" name="harga_mulai" class="input-field" required>
                             <option value="" disabled selected>Pilih Kategori Harga</option>
                         </select>
+                        <p class="error-message" id="harga_mulai-error"></p>
                     </div>
                     <div class="form-group">
                         <label for="tanggal-acara">Untuk Tanggal Berapa</label>
@@ -617,10 +729,8 @@
                         <p class="error-message" id="tanggal-acara-error"></p>
                     </div>
                 </div>
-
-                <!-- SEKSI 5: Unggah Foto -->
                 <div class="form-group">
-                    <label>Unggah Foto Referensi <span class="font-normal text-gray-400">(Bisa dilihat di Beranda / Instagram @Wiwidbeauty)</span></label>
+                    <label>Unggah Foto Referensi <span class="font-normal text-gray-400">(Opsional)</span></label>
                     <label for="file-upload" id="drop-zone"
                            class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg transition-colors duration-300 cursor-pointer">
                         <div id="upload-prompt" class="space-y-1 text-center pointer-events-none">
@@ -629,59 +739,43 @@
                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8"
                                       stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="flex text-sm text-gray-600 justify-center">
-                                <span class="relative bg-white rounded-md font-medium text-gray-600">
-                                    <span>Pilih file</span>
-                                </span>
-                                <p class="pl-1">atau tarik dan lepas</p>
-                            </div>
-                            <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 10MB</p>
-                        </div>
+                            <div class="flex text-sm text-gray-600 justify-center"><span
+                                    class="relative bg-white rounded-md font-medium text-gray-600"><span>Pilih file</span></span>
+                                <p class="pl-1">atau tarik dan lepas</p></div>
+                            <p class="text-xs text-gray-500">PNG, JPG, GIF hingga 10MB</p></div>
                     </label>
                     <input id="file-upload" name="file-upload" type="file" class="sr-only" multiple accept="image/*">
                     <div id="preview-container" class="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
                 </div>
-
-                <!-- SEKSI 6: Pengiriman & Catatan -->
                 <div class="form-group">
                     <label>Opsi Pengambilan</label>
-                    <div class="radio-options-group">
-                        <label class="radio-label">
-                            <input type="radio" name="opsi_pengambilan" value="diambil_sendiri" checked>
-                            <div class="custom-radio"></div>
-                            <i class="fa-solid fa-store icon"></i>
-                            <span>Diambil Sendiri</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="opsi_pengambilan" value="diantar">
-                            <div class="custom-radio"></div>
-                            <i class="fa-solid fa-truck icon"></i>
-                            <span>Diantar</span>
-                        </label>
-                    </div>
+                    <div class="radio-options-group"><label class="radio-label"><input type="radio"
+                                                                                       name="opsi_pengambilan"
+                                                                                       value="diambil_sendiri" checked>
+                        <div class="custom-radio"></div>
+                        <i class="fa-solid fa-store icon"></i><span>Diambil Sendiri</span></label><label
+                            class="radio-label"><input type="radio" name="opsi_pengambilan" value="diantar">
+                        <div class="custom-radio"></div>
+                        <i class="fa-solid fa-truck icon"></i><span>Diantar</span></label></div>
                 </div>
-                <div id="alamat-group" class="form-group" style="display: none;">
-                    <label for="alamat">Alamat Lengkap</label>
-                    <textarea id="alamat" name="alamat" class="input-field"
-                              placeholder="Masukkan jalan, kota, dan kode pos"></textarea>
-                    <p class="error-message" id="alamat-error"></p>
+                <div id="alamat-group" class="form-group" style="display: none;"><label for="alamat">Alamat
+                    Lengkap</label><textarea id="alamat" name="alamat" class="input-field"
+                                             placeholder="Masukkan jalan, kota, dan kode pos"></textarea>
+                    <p class="error-message" id="alamat-error"></p></div>
+                <div class="form-group"><label for="pesan">Pesan (Opsional)</label><textarea id="pesan" name="pesan"
+                                                                                             class="input-field"
+                                                                                             placeholder="Tinggalkan catatan tambahan di sini jika ada..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="pesan">Pesan (Opsional)</label>
-                    <textarea id="pesan" name="pesan" class="input-field"
-                              placeholder="Tinggalkan catatan tambahan di sini jika ada..."></textarea>
-                </div>
-
-                <!-- Tombol Submit -->
-                <div>
-                    <button type="submit" class="btn btn-primary w-full">Kirim Pesanan</button>
+                <div class="flex justify-center">
+                    <button type="submit" id="submit-btn" class="btn btn-outline"><i
+                            class="fa-solid fa-paper-plane"></i>Kirim Pesanan
+                    </button>
                 </div>
             </div>
         </form>
     </div>
 </main>
 
-<!-- Footer -->
 <footer>
     <div class="footer-content">
         <div class="footer-column">
@@ -702,48 +796,108 @@
         </div>
     </div>
     <div class="copyright">
-        <p>&copy; 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
+        <p>© 2025 Wiwid Bouquet. Hak Cipta Dilindungi.</p>
     </div>
 </footer>
 
+<div id="receipt-template" style="position: absolute; left: -9999px; top: 0;">
+    <h4>Wiwid Bouquet Shop</h4>
+    <p class="subtitle">Jl. Raya Talok, Garum, Blitar</p>
+    <div id="receipt-details"></div>
+    <div class="line"></div>
+    <div id="receipt-items"></div>
+    <div class="line"></div>
+    <div class="footer">--- Terima Kasih Telah Berbelanja ---<br>Struk ini adalah bukti pemesanan.</div>
+</div>
+
+<div id="confirmation-modal" class="modal-overlay">
+    <div class="modal-content">
+        <div id="modal-view-choice"><h2>Konfirmasi Pesanan</h2>
+            <p>Pesanan Anda sudah siap dikirim ke admin. Lanjutkan?</p>
+            <div class="modal-actions">
+                <button id="btn-confirm" class="btn btn-primary"><i class="fa-solid fa-check"></i>Ya, Lanjutkan</button>
+                <button id="btn-cancel-modal" class="btn btn-cancel-modal">Batal</button>
+            </div>
+        </div>
+        <div id="modal-view-loading" style="display: none;"><h2>Memproses Pesanan...</h2>
+            <div class="spinner"></div>
+            <p>Mohon tunggu sebentar, kami sedang mengirimkan pesanan Anda ke admin.</p></div>
+        <div id="modal-view-success" style="display: none;"><h2>Berhasil!</h2>
+            <p>Pesanan Anda telah terkirim. Admin kami akan segera menghubungi Anda via WhatsApp untuk konfirmasi lebih
+                lanjut. Anda bisa melihat struk pesanan Anda di bawah ini.</p>
+            <div id="receipt-image-container"></div>
+            <div class="modal-actions">
+                <button id="btn-close-modal" class="btn btn-primary">Tutup</button>
+            </div>
+        </div>
+        <div id="modal-view-error" style="display: none;"><h2>Gagal</h2>
+            <p id="error-text">Maaf, terjadi kesalahan saat mengirim pesanan. Silakan coba lagi atau hubungi admin
+                langsung.</p>
+            <div class="modal-actions">
+                <button id="btn-close-error-modal" class="btn btn-primary">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    // --- KONFIGURASI PENTING ---
+    const BACKEND_URL = 'https://ganti-dengan-url-ngrok-anda.ngrok-free.app'; // Ganti setelah menjalankan ngrok
+
+    // --- DEKLARASI ELEMEN ---
+    const form = document.getElementById('orderForm');
+    const modal = document.getElementById('confirmation-modal');
+    const modalViews = {
+        choice: document.getElementById('modal-view-choice'),
+        loading: document.getElementById('modal-view-loading'),
+        success: document.getElementById('modal-view-success'),
+        error: document.getElementById('modal-view-error'),
+    };
+    const btnConfirm = document.getElementById('btn-confirm');
+    const btnCancelModal = document.getElementById('btn-cancel-modal');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnCloseErrorModal = document.getElementById('btn-close-error-modal');
+    const receiptImageContainer = document.getElementById('receipt-image-container');
+    const errorText = document.getElementById('error-text');
+    const {kategori_barang} = form.elements;
+    const jenisBuketGroup = document.getElementById('jenis_buket_group');
+    const jenisBuketLabel = jenisBuketGroup.querySelector('label');
+    const ukuranGroup = document.getElementById('ukuran_group');
+    const nuansaWarnaGroup = document.getElementById('nuansa_warna_group');
+    const alamatGroup = document.getElementById('alamat-group');
+    const alamatTextarea = document.getElementById('alamat');
+    const hargaMulaiSelect = document.getElementById('harga_mulai');
+
+    // --- FUNGSI UTILITAS ---
     function capitalizeName(input) {
         input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());
     }
 
     function formatPhoneNumber(input) {
         let value = input.value.replace(/\D/g, '');
-        if (value.startsWith('0')) {
-            value = value.substring(1);
-        }
+        if (value.startsWith('0')) value = value.substring(1);
         value = value.substring(0, 12);
-        if (value.length > 7) {
-            value = value.replace(/(\d{3})(\d{4})(\d{1,5})/, '$1-$2-$3');
-        } else if (value.length > 3) {
-            value = value.replace(/(\d{3})(\d{1,4})/, '$1-$2');
-        }
+        if (value.length > 7) value = value.replace(/(\d{3})(\d{4})(\d{1,5})/, '$1-$2-$3');
+        else if (value.length > 3) value = value.replace(/(\d{3})(\d{1,4})/, '$1-$2');
         input.value = value;
     }
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    document.getElementById('tanggal-acara').min = tomorrow.toISOString().split("T")[0];
-
-    const kategoriSelect = document.getElementById('kategori_barang');
-    const jenisBuketGroup = document.getElementById('jenis_buket_group');
-    const jenisBuketLabel = jenisBuketGroup.querySelector('label');
-    const jenisBuketSelect = document.getElementById('jenis_buket');
-    const hargaMulaiSelect = document.getElementById('harga_mulai');
-    const ukuranGroup = document.getElementById('ukuran_group');
-    const nuansaWarnaGroup = document.getElementById('nuansa_warna_group');
+    form.elements['tanggal-acara'].min = tomorrow.toISOString().split("T")[0];
 
     const optionsData = {
         'Buket Bunga': {
             label: 'Jenis Buket',
             jenis: ['Buket Wisuda', 'Buket Ulang Tahun', 'Buket Anniversary'],
             harga: {
-                '15000-50000': 'Rp 15.000 - Rp 50.000', '100000': 'Rp 100.000', '150000': 'Rp 150.000',
-                '200000': 'Rp 200.000', '250000': 'Rp 250.000', '350000': 'Rp 350.000', '500000': 'Rp 500.000'
+                '15000-50000': 'Rp 15.000 - Rp 50.000',
+                '100000': 'Rp 100.000',
+                '150000': 'Rp 150.000',
+                '200000': 'Rp 200.000',
+                '250000': 'Rp 250.000',
+                '350000': 'Rp 350.000',
+                '500000': 'Rp 500.000'
             },
             showUkuran: true,
             showNuansa: true
@@ -751,136 +905,58 @@
         'Buket Balon': {
             label: 'Jenis Buket Balon',
             jenis: ['Balon Karakter', 'Balon Angka/Huruf', 'Balon Custom'],
-            harga: {
-                '150000-185000': 'Rp 150.000 - Rp 185.000'
-            },
+            harga: {'150000-185000': 'Rp 150.000 - Rp 185.000'},
             showUkuran: false,
             showNuansa: true
         },
         'Hampers': {
             label: 'Jenis Hampers',
             jenis: ['Hampers Lebaran', 'Hampers Natal', 'Hampers Makanan Ringan'],
-            harga: {
-                '100000': 'Rp 100.000', '250000': 'Rp 250.000', '500000': 'Rp 500.000'
-            },
+            harga: {'100000': 'Rp 100.000', '250000': 'Rp 250.000', '500000': 'Rp 500.000'},
             showUkuran: false,
             showNuansa: false
         }
     };
 
+    // PERBAIKAN 2: Fungsi diubah untuk mengurutkan harga
     function updateFormFields(category) {
+        if (!optionsData[category]) return;
         const config = optionsData[category];
-        if (!config) return;
-
         jenisBuketLabel.textContent = config.label;
-        jenisBuketSelect.innerHTML = '<option value="" disabled selected>Pilih Jenis...</option>';
+        form.elements.jenis_buket.innerHTML = '<option value="" disabled selected>Pilih Jenis...</option>';
         config.jenis.forEach(opt => {
             const option = document.createElement('option');
             option.value = opt;
             option.textContent = opt;
-            jenisBuketSelect.appendChild(option);
+            form.elements.jenis_buket.appendChild(option)
         });
 
         hargaMulaiSelect.innerHTML = '<option value="" disabled selected>Pilih Kategori Harga</option>';
-        Object.entries(config.harga).forEach(([value, text]) => {
+
+        // Mengurutkan harga dari yang termurah
+        const sortedPrices = Object.entries(config.harga).sort((a, b) => {
+            const priceA = parseInt(a[0].split('-')[0], 10);
+            const priceB = parseInt(b[0].split('-')[0], 10);
+            return priceA - priceB;
+        });
+
+        sortedPrices.forEach(([value, text]) => {
             const option = document.createElement('option');
             option.value = value;
             option.textContent = text;
-            hargaMulaiSelect.appendChild(option);
+            hargaMulaiSelect.appendChild(option)
         });
 
-        ukuranGroup.style.display = config.showUkuran ? 'block' : 'none';
-        nuansaWarnaGroup.style.display = config.showNuansa ? 'block' : 'none';
+        ukuranGroup.style.display = config.showUkuran ? 'flex' : 'none';
+        nuansaWarnaGroup.style.display = config.showNuansa ? 'flex' : 'none'
     }
 
-    kategoriSelect.addEventListener('change', (e) => {
-        updateFormFields(e.target.value);
-    });
+    kategori_barang.addEventListener('change', (e) => updateFormFields(e.target.value));
 
-    updateFormFields(kategoriSelect.value || 'Buket Bunga');
-
-    const dropZone = document.getElementById('drop-zone');
-    const fileUpload = document.getElementById('file-upload');
-    const previewContainer = document.getElementById('preview-container');
-    const uploadPrompt = document.getElementById('upload-prompt');
-    let uploadedFiles = [];
-
-    if (dropZone) {
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, preventDefaults, false);
-        });
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => dropZone.classList.add('border-indigo-600', 'bg-indigo-50'), false);
-        });
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => dropZone.classList.remove('border-indigo-600', 'bg-indigo-50'), false);
-        });
-        dropZone.addEventListener('drop', handleDrop, false);
-        fileUpload.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-    }
-
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    function handleDrop(e) {
-        handleFiles(e.dataTransfer.files);
-    }
-
-    function handleFiles(files) {
-        uploadedFiles = uploadedFiles.concat(Array.from(files));
-        renderPreviews();
-        updateFileInput();
-    }
-
-    function renderPreviews() {
-        uploadPrompt.style.display = uploadedFiles.length > 0 ? 'none' : 'block';
-        previewContainer.innerHTML = '';
-        uploadedFiles.forEach((file, index) => {
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const div = document.createElement('div');
-                    div.className = 'preview-item';
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = "preview-img";
-                    div.appendChild(img);
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.innerHTML = '&times;';
-                    removeBtn.className = 'delete-btn';
-                    removeBtn.title = 'Hapus gambar';
-                    removeBtn.onclick = () => {
-                        uploadedFiles.splice(index, 1);
-                        renderPreviews();
-                        updateFileInput();
-                    };
-                    div.appendChild(removeBtn);
-                    previewContainer.appendChild(div);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    function updateFileInput() {
-        const dataTransfer = new DataTransfer();
-        uploadedFiles.forEach(file => dataTransfer.items.add(file));
-        fileUpload.files = dataTransfer.files;
-    }
-
-    const pickupOptions = document.querySelectorAll('input[name="opsi_pengambilan"]');
-    const alamatGroup = document.getElementById('alamat-group');
-    const alamatTextarea = document.getElementById('alamat');
-
-    pickupOptions.forEach(option => {
+    document.querySelectorAll('input[name="opsi_pengambilan"]').forEach(option => {
         option.addEventListener('change', (e) => {
             if (e.target.value === 'diantar') {
-                alamatGroup.style.display = 'block';
+                alamatGroup.style.display = 'flex';
                 alamatTextarea.required = true;
             } else {
                 alamatGroup.style.display = 'none';
@@ -889,65 +965,147 @@
         });
     });
 
-    const form = document.getElementById('orderForm');
-
-    function showError(element, message) {
-        const errorElement = document.getElementById(`${element.id}-error`);
-        if (errorElement) {
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
-        }
-        if (element.id === 'whatsappNumber') {
-            document.getElementById('whatsapp-group').classList.add('input-error');
-        } else {
-            element.classList.add('input-error');
-        }
+    function switchModalView(viewName) {
+        Object.values(modalViews).forEach(view => view.style.display = 'none');
+        if (modalViews[viewName]) modalViews[viewName].style.display = 'block';
     }
 
-    function clearError(element) {
-        const errorElement = document.getElementById(`${element.id}-error`);
-        if (errorElement) {
-            errorElement.textContent = '';
-            errorElement.style.display = 'none';
+    function hideModal() {
+        modal.classList.remove('show');
+    }
+
+    function populateReceiptTemplate() {
+        const receiptDetails = document.getElementById('receipt-details');
+        const receiptItems = document.getElementById('receipt-items');
+        const data = Object.fromEntries(new FormData(form).entries());
+        const orderDate = new Date().toLocaleDateString('id-ID', {day: '2-digit', month: '2-digit', year: 'numeric'});
+        const orderTime = new Date().toLocaleTimeString('id-ID', {hour: '2-digit', minute: '2-digit'});
+        receiptDetails.innerHTML = `<div class="item-row"><span>Tanggal:</span> <span>${orderDate} ${orderTime}</span></div><div class="item-row"><span>Pemesan:</span> <span>${data.fullName}</span></div><div class="item-row"><span>Tgl Acara:</span> <span>${new Date(data['tanggal-acara']).toLocaleDateString('id-ID')}</span></div>`;
+        const hargaText = hargaMulaiSelect.options[hargaMulaiSelect.selectedIndex].text;
+        receiptItems.innerHTML = `<p><strong>${data.kategori_barang} - ${data.jenis_buket}</strong></p><p style="font-size: 10px; margin-left: 10px;">${data.ukuran ? `Ukuran: ${data.ukuran}` : ''} ${data.nuansa_warna ? `| Warna: ${data.nuansa_warna}` : ''}</p><div class="item-row"><span>${data.jumlah_pesanan} x (${hargaText})</span><span class="price">${hargaText}</span></div>`;
+    }
+
+    function getOrderDetailsText() {
+        const data = Object.fromEntries(new FormData(form).entries());
+        let details = `*Nama Pelanggan:* ${data.fullName}\n`;
+        details += `*Kategori:* ${data.kategori_barang}\n`;
+        details += `*Jenis:* ${data.jenis_buket}\n`;
+        if (data.ukuran) details += `*Ukuran:* ${data.ukuran}\n`;
+        if (data.nuansa_warna) details += `*Nuansa Warna:* ${data.nuansa_warna}\n`;
+        details += `*Jumlah:* ${data.jumlah_pesanan}\n`;
+        details += `*Budget:* ${hargaMulaiSelect.options[hargaMulaiSelect.selectedIndex].text}\n`;
+        details += `*Tgl Acara:* ${new Date(data['tanggal-acara']).toLocaleDateString('id-ID')}\n`;
+        details += `*Pengambilan:* ${data.opsi_pengambilan === 'diantar' ? 'Diantar' : 'Diambil Sendiri'}\n`;
+        if (data.opsi_pengambilan === 'diantar') details += `*Alamat:* ${data.alamat}\n`;
+        if (data.pesan) details += `*Pesan Tambahan:* ${data.pesan}`;
+        return details;
+    }
+
+    async function handleOrderSubmission() {
+        switchModalView('loading');
+        let canvas;
+        try {
+            populateReceiptTemplate();
+            canvas = await html2canvas(document.getElementById('receipt-template'), {scale: 2, useCORS: true});
+        } catch (err) {
+            console.error("Gagal membuat canvas:", err);
+            errorText.textContent = "Gagal membuat gambar struk.";
+            switchModalView('error');
+            return;
         }
-        if (element.id === 'whatsappNumber') {
-            document.getElementById('whatsapp-group').classList.remove('input-error');
-        } else {
-            element.classList.remove('input-error');
+        const imageData = canvas.toDataURL('image/png');
+
+        let receiptUrlPath;
+        try {
+            const uploadResponse = await fetch(`${BACKEND_URL}/upload-receipt`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({image: imageData})
+            });
+            if (!uploadResponse.ok) throw new Error(`Server error: ${uploadResponse.statusText}`);
+            const result = await uploadResponse.json();
+            receiptUrlPath = result.imageUrlPath;
+        } catch (err) {
+            console.error("Gagal upload:", err);
+            errorText.textContent = "Gagal mengunggah struk ke server. Pastikan server dan ngrok berjalan dengan benar.";
+            switchModalView('error');
+            return;
         }
+        const fullReceiptUrl = `${BACKEND_URL}${receiptUrlPath}`;
+
+        try {
+            const notifyResponse = await fetch(`${BACKEND_URL}/notify-admin`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    orderDetails: getOrderDetailsText(),
+                    customerWa: form.elements.whatsappNumber.value,
+                    receiptUrl: fullReceiptUrl
+                })
+            });
+            if (!notifyResponse.ok) throw new Error('Gagal mengirim notifikasi.');
+        } catch (err) {
+            console.error("Gagal notifikasi:", err);
+            errorText.textContent = "Gagal mengirim notifikasi ke admin. Periksa token bot dan chat ID di server.";
+            switchModalView('error');
+            return;
+        }
+
+        receiptImageContainer.innerHTML = `<img src="${fullReceiptUrl}" alt="Struk Pesanan Anda">`;
+        switchModalView('success');
+        form.reset();
+    }
+
+    btnConfirm.addEventListener('click', handleOrderSubmission);
+
+    function showError(el, msg) {
+        const errEl = document.getElementById(`${el.id}-error`);
+        if (errEl) {
+            errEl.textContent = msg;
+            errEl.style.display = 'block';
+        }
+        (el.closest('.input-group') || el).classList.add('input-error');
+    }
+
+    function clearError(el) {
+        const errEl = document.getElementById(`${el.id}-error`);
+        if (errEl) {
+            errEl.style.display = 'none';
+        }
+        (el.closest('.input-group') || el).classList.remove('input-error');
     }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
         let isValid = true;
         let firstInvalidElement = null;
-
         document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
         document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-
-        const fieldsToValidate = [
-            {element: form.fullName, message: 'Nama lengkap tidak boleh kosong.'},
-            {element: form.whatsappNumber, message: 'Nomor WhatsApp tidak boleh kosong.'},
-            {element: form.kategori_barang, message: 'Kategori produk harus dipilih.'},
-            {element: form.jenis_buket, message: 'Jenis produk harus dipilih.'},
-            {
-                element: form.jumlah_pesanan,
-                message: 'Jumlah pesanan tidak boleh nol atau kurang.',
-                condition: (el) => parseInt(el.value, 10) <= 0
-            },
-            {element: form['tanggal-acara'], message: 'Tanggal acara harus diisi.'},
-            {
-                element: form.ukuran,
-                message: 'Ukuran harus dipilih.',
-                condition: (el) => ukuranGroup.style.display !== 'none' && !el.value
-            },
-            {
-                element: form.alamat,
-                message: 'Alamat lengkap tidak boleh kosong saat memilih opsi diantar.',
-                condition: (el) => document.querySelector('input[name="opsi_pengambilan"]:checked').value === 'diantar' && !el.value.trim()
-            }
-        ];
-
+        const fieldsToValidate = [{
+            element: form.fullName,
+            message: 'Nama lengkap tidak boleh kosong.'
+        }, {
+            element: form.whatsappNumber,
+            message: 'Nomor WhatsApp tidak boleh kosong.'
+        }, {element: form.kategori_barang, message: 'Kategori produk harus dipilih.'}, {
+            element: form.jenis_buket,
+            message: 'Jenis produk harus dipilih.'
+        }, {
+            element: form.jumlah_pesanan,
+            message: 'Jumlah pesanan tidak boleh nol atau kurang.',
+            condition: el => parseInt(el.value, 10) <= 0
+        }, {element: form['tanggal-acara'], message: 'Tanggal acara harus diisi.'}, {
+            element: form.harga_mulai,
+            message: 'Kategori harga harus dipilih.'
+        }, {
+            element: form.ukuran,
+            message: 'Ukuran harus dipilih.',
+            condition: el => ukuranGroup.style.display !== 'none' && !el.value
+        }, {
+            element: form.alamat,
+            message: 'Alamat lengkap tidak boleh kosong saat memilih opsi diantar.',
+            condition: el => document.querySelector('input[name="opsi_pengambilan"]:checked').value === 'diantar' && !el.value.trim()
+        }];
         fieldsToValidate.forEach(field => {
             const condition = field.condition ? field.condition(field.element) : !field.element.value.trim();
             if (condition) {
@@ -958,18 +1116,26 @@
                 }
             }
         });
-
         if (!isValid && firstInvalidElement) {
             firstInvalidElement.scrollIntoView({behavior: 'smooth', block: 'center'});
         } else if (isValid) {
-            alert('Form valid! Siap untuk dikirim.');
+            switchModalView('choice');
+            modal.classList.add('show');
         }
     });
 
     form.querySelectorAll('input, select, textarea').forEach(input => {
         input.addEventListener('input', () => clearError(input));
+        input.addEventListener('change', () => clearError(input));
+    });
+    [btnCancelModal, btnCloseModal, btnCloseErrorModal].forEach(btn => btn.addEventListener('click', hideModal));
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) hideModal();
     });
 
+    document.addEventListener('DOMContentLoaded', () => {
+        updateFormFields(kategori_barang.value || 'Buket Bunga');
+    });
 </script>
 
 </body>
