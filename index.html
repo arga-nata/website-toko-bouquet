@@ -15,6 +15,93 @@
             rel="stylesheet"
     />
     <style>
+        @media (max-width: 768px) {
+            .grid-col-2, .grid-col-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+                gap: 15px;
+                align-items: center; /* Memastikan logo dan nav terpusat */
+            }
+
+            .logo_brand {
+                font-size: 1.2rem; /* Sedikit mengecilkan font logo */
+            }
+
+            .nav-links {
+                gap: 5px; /* Mengurangi jarak antar menu nav */
+                flex-wrap: wrap; /* Memungkinkan menu turun jika tidak muat */
+                justify-content: center; /* Pusatkan menu */
+            }
+
+            main {
+                /* Mengurangi padding utama di mobile agar form lebih lebar */
+                padding: 1.5rem 1rem;
+            }
+
+            .form-container {
+                /* Mengurangi padding form di mobile */
+                padding: 1.5rem;
+            }
+
+            .form-header h1 {
+                /* Menyesuaikan ukuran judul di mobile */
+                font-size: 1.75rem;
+            }
+
+            .form-header p {
+                font-size: 0.95rem; /* Menyesuaikan ukuran sub-judul */
+            }
+
+            /* Membuat grup radio button menjadi 1 kolom di mobile */
+            .radio-options-group {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                /* Membuat konten footer menjadi 1 kolom dan terpusat */
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-column h3:after {
+                /* Memusatkan garis bawah judul footer */
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer-links a {
+                /* Memusatkan link di footer */
+                justify-content: center;
+            }
+
+            .footer-links a:hover {
+                /* Menonaktifkan efek hover geser di mobile */
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links a {
+                padding: 8px 10px; /* Padding lebih kecil untuk tombol nav */
+                font-size: 0.9rem;
+            }
+
+            .form-container {
+                padding: 1rem; /* Padding lebih kecil lagi untuk layar sempit */
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+        }
+
         :root {
             --primary: #240046;
             --secondary: #3c096c;
