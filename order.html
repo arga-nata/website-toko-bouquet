@@ -942,6 +942,104 @@
     const alamatGroup = document.getElementById('alamat-group');
     const alamatTextarea = document.getElementById('alamat');
     const hargaMulaiSelect = document.getElementById('harga_mulai');
+    // --- Deklarasi Elemen untuk Upload Gambar ---
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-upload');
+    const previewContainer = document.getElementById('preview-container');
+    const uploadPrompt = document.getElementById('upload-prompt');
+
+
+    // --- State Management for Uploaded Files ---
+    let uploadedFiles = []; // Array to store File objects
+
+    // --- FUNGSI-FUNGSI UNTUK UPLOAD GAMBAR ---
+
+    // Fungsi untuk merender preview gambar
+    const renderPreviews = () => {
+        previewContainer.innerHTML = ''; // Kosongkan container
+
+        // Tampilkan atau sembunyikan prompt upload
+        if (uploadedFiles.length > 0) {
+            uploadPrompt.style.display = 'none';
+        } else {
+            uploadPrompt.style.display = 'block';
+            fileInput.value = ''; // Reset input file jika tidak ada file tersisa
+        }
+
+        // Buat preview untuk setiap file yang diunggah
+        uploadedFiles.forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+
+                const img = document.createElement('img');
+                img.className = 'preview-img';
+                img.src = e.target.result;
+                img.alt = file.name;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '&times;';
+                deleteBtn.type = 'button'; // Pastikan tidak mensubmit form
+                deleteBtn.dataset.index = index; // Simpan index file untuk dihapus
+
+                previewItem.appendChild(img);
+                previewItem.appendChild(deleteBtn);
+                previewContainer.appendChild(previewItem);
+            };
+            reader.readAsDataURL(file);
+        });
+    };
+
+    // Fungsi untuk menangani file yang dipilih (baik via klik atau drag-drop)
+    const handleFiles = (files) => {
+        const newFiles = [...files].filter(file => {
+            // Cek tipe file (opsional, tapi disarankan)
+            if (!file.type.startsWith('image/')) {
+                return false;
+            }
+            // Cek apakah file sudah ada
+            return !uploadedFiles.some(existingFile =>
+                existingFile.name === file.name && existingFile.size === file.size
+            );
+        });
+
+        uploadedFiles.push(...newFiles);
+        renderPreviews();
+    };
+
+    // Event listener untuk klik pilih file
+    fileInput.addEventListener('change', (e) => {
+        handleFiles(e.target.files);
+    });
+
+    // Event listener untuk drag and drop
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-indigo-400'); // Beri feedback visual
+    });
+
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-indigo-400');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-indigo-400');
+        handleFiles(e.dataTransfer.files);
+    });
+
+    // Event listener untuk menghapus gambar (menggunakan event delegation)
+    previewContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('delete-btn')) {
+            const index = parseInt(e.target.dataset.index, 10);
+            uploadedFiles.splice(index, 1); // Hapus file dari array
+            renderPreviews(); // Render ulang semua preview
+        }
+    });
+
 
     // --- FUNGSI UTILITAS ---
     function capitalizeName(input) {
