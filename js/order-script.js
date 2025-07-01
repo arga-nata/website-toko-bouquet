@@ -290,7 +290,7 @@ function updateFormFields(category) {
   const config = optionsData[category];
   jenisBuketLabel.textContent = config.label;
   jenisBuketSelect.innerHTML =
-    '<option value="" disabled selected>Pilih Jenis...</option>';
+    '<option value="" disabled selected>Pilih Jenis</option>';
   config.jenis.forEach((opt) => jenisBuketSelect.add(new Option(opt, opt)));
   hargaMulaiSelect.innerHTML =
     '<option value="" disabled selected>Pilih Kategori Harga</option>';
