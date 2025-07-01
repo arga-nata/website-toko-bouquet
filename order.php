@@ -253,19 +253,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="form-group" id="nuansa_warna_group"><label for="nuansa_warna">Nuansa Warna</label><input
                                 type="text" id="nuansa_warna" name="nuansa_warna" class="input-field"
                                 placeholder="Contoh: Pastel, Earth tone"></div>
-                        <div class="form-group" id="ukuran_group"><label for="ukuran">Ukuran</label><select id="ukuran"
-                                name="ukuran"
-                                class="input-field"
-                                required>
-                                <option value="" disabled selected>Pilih Ukuran</option>
-                                <option value="Small">Small</option>
-                                <option value="large">Large</option>
-                                <option value="Big">Big</option>
-                            </select>
-                            <p class="error-message" id="ukuran-error"></p>
-                        </div>
-                    </div>
-                    <div class="form-grid grid-col-2">
                         <div class="form-group"><label for="harga_mulai">Kategori Harga</label><select id="harga_mulai"
                                 name="harga_mulai"
                                 class="input-field"
@@ -273,6 +260,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <option value="" disabled selected>Pilih Kategori Harga</option>
                             </select>
                             <p class="error-message" id="harga_mulai-error"></p>
+                        </div>
+                    </div>
+                    <div class="form-grid grid-col-2">
+                        <div class="form-group" id="ukuran_group">
+                            <label for="ukuran">Ukuran</label>
+                            <select id="ukuran" name="ukuran" class="input-field" required disabled>
+                                <option value="" disabled selected>Pilih Kategori Harga dulu</option>
+                            </select>
+                            <p class="error-message" id="ukuran-error"></p>
                         </div>
                         <div class="form-group"><label for="tanggal-acara">Untuk Tanggal Berapa</label><input type="date"
                                 name="tanggal-acara"

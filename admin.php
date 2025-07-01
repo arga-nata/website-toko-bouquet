@@ -39,7 +39,7 @@ if (isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true) 
                         JOIN pelanggan pl ON p.id_pelanggan = pl.id_pelanggan
                         JOIN detail_pesanan dp ON p.id_pesanan = dp.id_pesanan
                         WHERE p.status = ?
-                        ORDER BY p.tanggal_order ASC";
+                        ORDER BY p.tanggal_order DESC";
                 $stmt = $conn->prepare($sql);
                 $stmt->bind_param("s", $status);
                 $stmt->execute();
@@ -108,12 +108,15 @@ if (isset($_SESSION['admin_loggedin']) && $_SESSION['admin_loggedin'] === true) 
                     $newFileName = uniqid() . '-' . basename($file['name']);
                     $newFilePath = $uploadDir . $newFileName;
                     if (move_uploaded_file($file['tmp_name'], $newFilePath)) {
-                        $stmt = $conn->prepare("INSERT INTO produk (id_kategori, gambar, unggulan) VALUES (?, ?, 0)");
-                        $stmt->bind_param("is", $id_kategori, $newFilePath);
+                        $stmt = $conn->prepare("INSERT INTO produk (id_kategori, gambar, unggulan) VALUES (?, ?, ?)");
+                        $unggulan_default = 0; // Siapkan nilai default untuk unggulan
+                        // Ikat 3 variabel: integer, string, integer (isi)
+                        $stmt->bind_param("isi", $id_kategori, $newFilePath, $unggulan_default);
                         if ($stmt->execute()) {
                             echo json_encode(['success' => true, 'message' => 'Produk baru berhasil ditambahkan.']);
                         } else {
-                            echo json_encode(['success' => false, 'message' => 'Gagal menyimpan ke database.']);
+                            // Tambahkan pesan error dari database untuk debugging
+                            echo json_encode(['success' => false, 'message' => 'Gagal menyimpan ke database: ' . $stmt->error]);
                         }
                     } else {
                         echo json_encode(['success' => false, 'message' => 'Gagal upload file.']);

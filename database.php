@@ -2,7 +2,7 @@
 $host = 'localhost';
 $db_user = 'root';
 $db_pass = '';
-$db_name = 'bouquete_shop';
+$db_name = 'wb_db';
 
 $conn = new mysqli($host, $db_user, $db_pass, $db_name);
 
