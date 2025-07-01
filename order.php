@@ -69,16 +69,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $ref_image_paths = [];
+
         if (isset($_FILES['file-upload'])) {
             $upload_dir = 'uploads/';
             if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+
+            $unique_files = [];
+
             foreach ($_FILES['file-upload']['name'] as $key => $name) {
                 if ($_FILES['file-upload']['error'][$key] === UPLOAD_ERR_OK) {
-                    $tmp_name = $_FILES['file-upload']['tmp_name'][$key];
-                    $ref_filename = 'ref-' . date('Ymd-His') . '-' . uniqid() . '-' . basename($name);
-                    $ref_path = $upload_dir . $ref_filename;
-                    if (move_uploaded_file($tmp_name, $ref_path)) {
-                        $ref_image_paths[] = $ref_path;
+                    $file_hash = md5_file($_FILES['file-upload']['tmp_name'][$key]);
+
+                    if (!in_array($file_hash, $unique_files)) {
+                        $unique_files[] = $file_hash;
+
+                        $tmp_name = $_FILES['file-upload']['tmp_name'][$key];
+                        $ref_filename = 'ref-' . date('Ymd-His') . '-' . uniqid() . '-' . basename($name);
+                        $ref_path = $upload_dir . $ref_filename;
+
+                        if (move_uploaded_file($tmp_name, $ref_path)) {
+                            $ref_image_paths[] = $ref_path;
+                        }
                     }
                 }
             }
